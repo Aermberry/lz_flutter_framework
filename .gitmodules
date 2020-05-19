@@ -1,0 +1,4 @@
+[submodule ".flutter"]
+	path = .flutter
+	url = https://gogs.liangzhicn.com/cfli/flutter.git
+	branch = stable
