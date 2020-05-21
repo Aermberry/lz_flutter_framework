@@ -1,6 +1,6 @@
 import 'package:inject/inject.dart';
 import 'package:lz_flutter/flutter_base.dart';
-import 'package:lz_flutter_app/main.dart';
+import 'package:lz_flutter_app/main_common.dart';
 
 @provide
 class Routers{
