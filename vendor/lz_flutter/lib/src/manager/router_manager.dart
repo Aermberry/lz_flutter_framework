@@ -37,6 +37,7 @@ class RouterManager {
       {Map<String, dynamic> params,
       bool replace = false,
       bool clearStack = false,
+      Duration transitionDuration,
       TransitionType transition = TransitionType.native,
       Function(Object) resultFunction}) {
     String query = "";
@@ -57,7 +58,10 @@ class RouterManager {
     path = path + query;
     return _router
         .navigateTo(context, path,
-            transition: transition, replace: false, clearStack: clearStack)
+            transition: transition,
+            replace: false,
+            clearStack: clearStack,
+            transitionDuration: transitionDuration)
         .then((result) {
       if (result == null) {
         return;
