@@ -62,7 +62,7 @@ extension ExtView on View{
    * replace 是否移除当前page
    * params 可带参
    * clearStack 是否清除路由堆栈
-   * resultFunction 需要返回值的跳转
+   * keepThisPage 清除路由堆栈时是否保留当前界面
    */
   void routeTo(String routePath,{bool replace = false,bool clearStack = false,bool keepThisPage = false, Object params}){
     if(replace){
