@@ -4,6 +4,7 @@ import 'package:lz_flutter/flutter_base.dart';
 import 'package:lz_flutter_app/res/string/en.dart';
 import 'package:lz_flutter_app/res/string/zh.dart';
 
+import 'config/router.dart';
 import 'config/signature_interceptor.dart';
 import 'di/app_injector.dart';
 
@@ -34,10 +35,6 @@ Future<void> init() async {
           JsonToTypeConverter(injector.jsonConverter.getJsonConvert()))
 //      .setRepository([SecurityRepository.create()])     //传入Chopper的Repository
       .addNetWorkInterceptor(SignatureInterceptor()); //添加Chopper的拦截器
-
-  Config.getInstance()
-      .routerConfig //路由配置
-      .addRouterProvider(injector.router.getRoutersData()); //传入路由配置
 }
 
 @provide
@@ -46,8 +43,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      onGenerateRoute:
-          RouterManager.getInstance().getRouter().generator, //fluro 路由配置
+      routes: injector.router.getRoutersData(),
+      initialRoute: "/",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

@@ -1,9 +1,7 @@
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../interface/view.dart';
-import '../manager/router_manager.dart';
 import '../widget/default_loading_dialog.dart';
 
 
@@ -47,7 +45,7 @@ extension ExtView on View{
   /**
    * 退出当前页面 可带参数
    */
-  void pop({result}) {
+  void pop({Object result}) {
     Navigator.of(getContext()).pop(result);
   }
 
@@ -66,8 +64,14 @@ extension ExtView on View{
    * clearStack 是否清除路由堆栈
    * resultFunction 需要返回值的跳转
    */
-  void routeTo(String routePath,{bool replace = false,bool clearStack = false,Map<String, dynamic> params,Function(Object) resultFunction}){
-    RouterManager.getInstance().navigateTo(getContext(), routePath,params: params,replace: replace,clearStack: clearStack);
+  void routeTo(String routePath,{bool replace = false,bool clearStack = false,bool keepThisPage = false, Object params}){
+    if(replace){
+      Navigator.pushReplacementNamed(getContext(), routePath,arguments: params);
+    } else if(clearStack){
+      Navigator.pushNamedAndRemoveUntil(getContext(), routePath,(r) => keepThisPage, arguments: params);
+    }else{
+      Navigator.pushNamed(getContext(), routePath,arguments: params);
+    }
   }
 
 

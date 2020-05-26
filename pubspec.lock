@@ -204,13 +204,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.12.0"
-  fluro:
-    dependency: transitive
-    description:
-      name: fluro
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.6.3"
   flutter:
     dependency: "direct main"
     description: flutter
