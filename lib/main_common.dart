@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
 import 'package:lz_flutter/flutter_base.dart';
+import 'package:lz_flutter_app/proxy.dart';
 import 'package:lz_flutter_app/res/string/en.dart';
 import 'package:lz_flutter_app/res/string/zh.dart';
 
@@ -30,10 +31,10 @@ Future<void> init() async {
   Config.getInstance()
       .netWorkConfig //网络配置
       .setApiDomain(apiDomain) //Api Domain
+      .setProxy(PROXY)
       .setConnectionTimeout(Duration(seconds: 15)) //设置超时时间
       .setJsonConverter(//Json自动序列化
           JsonToTypeConverter(injector.jsonConverter.getJsonConvert()))
-//      .setRepository([SecurityRepository.create()])     //传入Chopper的Repository
       .addNetWorkInterceptor(SignatureInterceptor()); //添加Chopper的拦截器
 }
 
