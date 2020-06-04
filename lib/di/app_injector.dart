@@ -1,6 +1,7 @@
 import 'package:inject/inject.dart';
 import 'package:lz_flutter_app/config/json_converter.dart';
 import 'package:lz_flutter_app/config/router.dart';
+import 'package:lz_flutter_app/home/page/home.dart';
 import '../main_common.dart';
 import 'app_injector.inject.dart' as g;
 
@@ -8,7 +9,7 @@ import 'app_injector.inject.dart' as g;
 abstract class AppInjector {
 
   @provide
-  MyApp get myApp;
+  HomePage get home;
 
   @provide
   Routers get router;

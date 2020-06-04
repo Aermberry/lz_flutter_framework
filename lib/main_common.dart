@@ -16,7 +16,7 @@ void mainCommon(String apiServerUrl) async {
   apiDomain = apiServerUrl;
   WidgetsFlutterBinding.ensureInitialized();
   await init();
-  runApp(injector.myApp);
+  runApp(injector.home);
 }
 
 Future<void> init() async {
@@ -48,8 +48,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       theme: ThemeData(
         primarySwatch: Colors.blue,
-      ),
-      home: Container(),
+      )
     );
   }
 }
