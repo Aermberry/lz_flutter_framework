@@ -1,1 +1,0 @@
-const TOOLBAR_SIZE = 10;
