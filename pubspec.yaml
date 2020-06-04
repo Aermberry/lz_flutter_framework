@@ -28,7 +28,7 @@ dependencies:
   inject:
     path: ./vendor/inject.dart/package/inject
   lz_flutter:
-    path: ./vendor/lz_flutter
+    path: ./lz-flutter
 
 dev_dependencies:
   flutter_test:
