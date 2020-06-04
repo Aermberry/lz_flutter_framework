@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter",
+            "type": "dart",
+            "request": "launch",
+            // "flutterMode": "profile",
+            "program": "lib/main_dev.dart" ,
+            "preLaunchTask": "increase_build_number"
+        }
+    ]
+}

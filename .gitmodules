@@ -1,0 +1,12 @@
+[submodule ".flutter"]
+	path = .flutter
+	url = https://gogs.liangzhicn.com/cfli/flutter.git
+	branch = stable
+[submodule "lz-flutter"]
+	path = lz-flutter
+	url = https://gitlab.liangzhicn.com/lz-flutter/lz-flutter.git
+	branch = master
+[submodule "jenkins"]
+	path = jenkins
+	url = https://gitlab.liangzhicn.com/jenkins-ci/flutter-app.git
+	branch = master
