@@ -22,11 +22,11 @@ class LocalManager {
 
   dynamic getLocalRes(BuildContext context,String key){
     var localRes = Config.getInstance().resourceConfig.getLocalRes();
-    if(localRes[getLanguageCode(context,true)][key] != null)
+    if(localRes[getLanguageCode(context,true)] != null && localRes[getLanguageCode(context,true)][key] != null)
       return localRes[getLanguageCode(context,true)][key];
-    if(localRes[getLanguageCode(context,false)][key] != null)
+    if(localRes[getLanguageCode(context,false)] != null && localRes[getLanguageCode(context,false)][key] != null)
       return localRes[getLanguageCode(context,false)][key];
-    if(localRes[Config.getInstance().resourceConfig.getDefaultLanguageCode()][key] != null)
+    if(localRes[Config.getInstance().resourceConfig.getDefaultLanguageCode()] != null && localRes[Config.getInstance().resourceConfig.getDefaultLanguageCode()][key] != null)
       return localRes[Config.getInstance().resourceConfig.getDefaultLanguageCode()][key];
     assert(true,'未定义的资源');
     return null;
