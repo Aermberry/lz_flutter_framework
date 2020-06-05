@@ -6,20 +6,12 @@
 
 #### 安装步骤
 
-打开"终端"，转到项目根目录，运行以下命令
+在pubspec.yaml文件中引入
 
-```bash
-sh -c "$(curl 'https://gitlab.liangzhicn.com/lz-flutter/lz-flutter/raw/master/install.sh')"
 ```
-
-
-
-#### 删除步骤
-
-打开"终端"，转到项目根目录，运行以下指令
-
-```bash
-lz-flutter/uninstall.sh
+  lz_flutter:
+    git:
+      url: http://gitlab.liangzhicn.com/lz-flutter/lz-flutter.git
 ```
 
 
