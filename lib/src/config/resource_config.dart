@@ -34,4 +34,10 @@ class ResourceConfig extends IResourceConfig {
   @override
   String getDefaultLanguageCode() => _defaultLanguageCode;
 
+  @override
+  IResourceConfig setDesignSize(double width, double height, {double density = 3.0}){
+    setDesignWHD(width, height,density: density);
+    return this;
+  }
+
 }
