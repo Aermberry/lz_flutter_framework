@@ -1,6 +1,7 @@
 
 
 import '../interface/i_resource_config.dart';
+import '../utils/screen_util.dart';
 
 class ResourceConfig extends IResourceConfig {
   Map _localRes = Map();
