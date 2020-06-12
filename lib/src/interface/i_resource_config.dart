@@ -27,5 +27,6 @@ abstract class IResourceConfig {
   IResourceConfig setDefaultLanguageCode(String value);
 
   String getDefaultLanguageCode();
-
+  
+  IResourceConfig setDesignSize(double width,double height,{double density = 3.0});
 }
