@@ -43,11 +43,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      routes: injector.router.getRoutersData(),
-      initialRoute: "/",
+       routes: injector.router.getRoutersData(injector),
+       initialRoute: '/',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-      )
+      ),
     );
   }
 }
