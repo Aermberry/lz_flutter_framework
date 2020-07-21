@@ -1,6 +1,6 @@
 [submodule ".flutter"]
 	path = .flutter
-	url = https://gogs.liangzhicn.com/cfli/flutter.git
+	url = https://github.com/flutter/flutter.git
 	branch = stable
 [submodule "lz-flutter"]
 	path = lz-flutter
