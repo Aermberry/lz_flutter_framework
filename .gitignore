@@ -32,6 +32,10 @@
 .pub/
 /build/
 
+# iOS/XCode related
+/ios/Pods/Pods.xcodeproj/project.pbxproj
+/ios/build
+
 # Web related
 lib/generated_plugin_registrant.dart
 
