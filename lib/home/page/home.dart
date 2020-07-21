@@ -1,23 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inject/inject.dart';
-import 'package:lz_flutter/flutter_base.dart';
 
 @provide
-class HomePage extends StatelessWidget implements View {
-  BuildContext _context;
+class HomePage extends StatefulWidget {
+  const HomePage();
 
   @override
-  Widget build(BuildContext context) {
-    _context = context;
-    return Scaffold(
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>  {
+  @override
+  Widget build(BuildContext context) =>
+     Scaffold(
       body: Container(
         alignment: Alignment.center,
-        child: Text('Hello World !!!'),
+        child:const Text('dsdsa'),
       ),
     );
-  }
-
-  @override
-  BuildContext getContext() => _context;
 }
