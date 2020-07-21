@@ -16,7 +16,7 @@ void mainCommon(String apiServerUrl) async {
   apiDomain = apiServerUrl;
   WidgetsFlutterBinding.ensureInitialized();
   await init();
-  runApp(injector.myApp);
+  runApp(MyApp());
 }
 
 Future<void> init() async {
@@ -38,7 +38,6 @@ Future<void> init() async {
       .addNetWorkInterceptor(SignatureInterceptor()); //添加Chopper的拦截器
 }
 
-@provide
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -48,8 +47,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       theme: ThemeData(
         primarySwatch: Colors.blue,
-      ),
-      home: Container(),
+      )
     );
   }
 }

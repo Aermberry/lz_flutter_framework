@@ -28,7 +28,8 @@ dependencies:
   inject:
     path: ./vendor/inject.dart/package/inject
   lz_flutter:
-    path: ./lz-flutter
+    git:
+      url: http://gitlab.liangzhicn.com/lz-flutter/lz-flutter.git
 
 dev_dependencies:
   flutter_test:
