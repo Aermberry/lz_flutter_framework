@@ -58,4 +58,11 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   @override
   BuildContext getContext() => context;
 
+  @override
+  void refresh() {
+    setState(() {
+      
+    });
+  }
+
 }

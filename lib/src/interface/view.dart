@@ -19,6 +19,8 @@ abstract class View {
 
   void popTo(String routePath);
 
+  void refresh();
+
   Future<T> routeTo<T extends Object>(String routePath,{bool replace = false,bool clearStack = false,bool keepThisPage = false, Object params});
 
 }
