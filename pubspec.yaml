@@ -9,5 +9,5 @@ dependencies:
   floor: ^0.12.0
   synchronized: '>=1.5.1 <4.0.0'
   shared_preferences: '>=0.4.1 <3.0.0'
-  path_provider: '>=1.2.0 <3.0.0'
+  path_provider: '1.6.11'
   json_annotation: ^3.0.0
