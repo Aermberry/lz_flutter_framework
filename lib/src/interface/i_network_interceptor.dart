@@ -6,6 +6,6 @@ abstract class INetWorkInterceptor{
 
   Response requestAfter(Response response);
 
-  void requestError(int code,Response response);
+  void requestError(Request request,Response response);
 
 }
