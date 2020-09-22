@@ -30,6 +30,7 @@ dependencies:
   lz_flutter:
     git:
       url: http://gitlab.liangzhicn.com/lz-flutter/lz-flutter.git
+      ref: '1.1.2'
 
 dev_dependencies:
   flutter_test:

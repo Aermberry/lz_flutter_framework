@@ -4,7 +4,6 @@ import 'package:lz_flutter_app/proxy.dart';
 import 'package:lz_flutter_app/res/string/en.dart';
 import 'package:lz_flutter_app/res/string/zh.dart';
 
-import 'config/signature_interceptor.dart';
 import 'di/app_injector.dart';
 
 AppInjector injector;
@@ -33,7 +32,10 @@ Future<void> init() async {
       .setConnectionTimeout(const Duration(seconds: 15)) //设置超时时间
       .setJsonConverter(//Json自动序列化
           JsonToTypeConverter(injector.jsonConverter.getJsonConvert()))
-      .addNetWorkInterceptor(SignatureInterceptor()); //添加Chopper的拦截器
+      .addNetWorkInterceptor([
+    injector.httpRequestAutoRetryInterceptor,
+    injector.httpRequestSignatureInterceptor
+  ]); //添加opper的拦截器
 }
 
 class MyApp extends StatelessWidget {
