@@ -8,7 +8,7 @@ import '../network/json_to_type_converter.dart';
 
 
 class NetWorkConfig extends INetWorkConfig {
-  INetWorkInterceptor _netWorkInterceptor;
+  List<INetWorkInterceptor> _netWorkInterceptor = List();
   String _domain;
   String _proxy;
   Function _httpsCertificate;
@@ -18,8 +18,8 @@ class NetWorkConfig extends INetWorkConfig {
   Duration _connectionTimeout;
 
   @override
-  INetWorkConfig addNetWorkInterceptor(INetWorkInterceptor netWorkInterceptor) {
-    _netWorkInterceptor = netWorkInterceptor;
+  INetWorkConfig addNetWorkInterceptor(List<INetWorkInterceptor> iNetWorkInterceptor) {
+    _netWorkInterceptor = iNetWorkInterceptor;
     return this;
   }
 
@@ -30,7 +30,7 @@ class NetWorkConfig extends INetWorkConfig {
   Function getHttpsCertificate() => _httpsCertificate;
 
   @override
-  INetWorkInterceptor getNetWorkInterceptor() => _netWorkInterceptor;
+  List<INetWorkInterceptor> getNetWorkInterceptor() => _netWorkInterceptor;
 
   @override
   String getProxy() => _proxy;

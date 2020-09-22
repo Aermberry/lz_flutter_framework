@@ -18,96 +18,62 @@ class Api {
   ChopperClient getClient() {
     if (_chopperClient == null) {
       var httpClient = new HttpClient();
-      if (Config
-          .getInstance()
-          .netWorkConfig
-          .getConnectionTimeout() != null)
+      if (Config.getInstance().netWorkConfig.getConnectionTimeout() != null)
         httpClient.connectionTimeout =
-            Config
-                .getInstance()
-                .netWorkConfig
-                .getConnectionTimeout();
-      if (Config
-          .getInstance()
-          .netWorkConfig
-          .getHttpsCertificate() != null)
+            Config.getInstance().netWorkConfig.getConnectionTimeout();
+      if (Config.getInstance().netWorkConfig.getHttpsCertificate() != null)
         httpClient.badCertificateCallback =
-            Config
-                .getInstance()
-                .netWorkConfig
-                .getHttpsCertificate();
+            Config.getInstance().netWorkConfig.getHttpsCertificate();
       else
         httpClient.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => true);
-      if (Config
-          .getInstance()
-          .netWorkConfig
-          .getProxy() != null)
+            ((X509Certificate cert, String host, int port) => true);
+      if (Config.getInstance().netWorkConfig.getProxy() != null)
         httpClient.findProxy =
-            (url) =>
-            Config
-                .getInstance()
-                .netWorkConfig
-                .getProxy();
+            (url) => Config.getInstance().netWorkConfig.getProxy();
 
       _chopperClient = MyChopperClient(
           interceptors: [
-                (request) async => requestInterceptor(request),
-                (response) async => responseInterceptor(response),
+            (request) async => requestInterceptor(request),
+            (response) async => responseInterceptor(response),
           ],
           converter:
-          Config
-              .getInstance()
-              .netWorkConfig
-              .getJsonConverter() == null
-              ? null
-              : Config
-              .getInstance()
-              .netWorkConfig
-              .getJsonConverter(),
+              Config.getInstance().netWorkConfig.getJsonConverter() == null
+                  ? null
+                  : Config.getInstance().netWorkConfig.getJsonConverter(),
           client: httpIo.IOClient(httpClient),
-          baseUrl: Config
-              .getInstance()
-              .netWorkConfig
-              .getDomain(),
-          services: Config
-              .getInstance()
-              .netWorkConfig
-              .getRepository());
+          baseUrl: Config.getInstance().netWorkConfig.getDomain(),
+          services: Config.getInstance().netWorkConfig.getRepository());
     }
     return _chopperClient;
   }
 
   Request requestInterceptor(Request request) {
-    var interceptor =
-    Config
-        .getInstance()
+    Request requestBefore = request;
+    Config.getInstance()
         .netWorkConfig
-        .getNetWorkInterceptor();
-    if (interceptor == null) return request;
-    var requestBefore = interceptor.requestBefore(request);
-    if (requestBefore == null) return request;
+        .getNetWorkInterceptor()
+        .forEach((interceptor) {
+      requestBefore = interceptor.requestBefore(requestBefore);
+    });
     return requestBefore;
   }
 
   Response responseInterceptor(Response response) {
-    var interceptor =
-    Config
-        .getInstance()
+    Response responseAfter = response;
+    Config.getInstance()
         .netWorkConfig
-        .getNetWorkInterceptor();
-    if (interceptor == null) return response;
-    if (response.statusCode != 200 || response.statusCode != 201) {
-      interceptor.requestError(null, response);
-    }
-    var responseAfter = interceptor.requestAfter(response);
-    if (responseAfter == null) return response;
+        .getNetWorkInterceptor()
+        .forEach((interceptor) {
+      if (response.statusCode != 200 || response.statusCode != 201) {
+        interceptor.requestError(null, response);
+      }
+      responseAfter = interceptor.requestAfter(responseAfter);
+    });
     return responseAfter;
   }
 }
 
 class MyChopperClient extends ChopperClient {
-
   MyChopperClient({
     baseUrl: "",
     http.Client client,
@@ -116,30 +82,30 @@ class MyChopperClient extends ChopperClient {
     ErrorConverter errorConverter,
     Iterable<ChopperService> services,
   }) : super(
-      baseUrl: baseUrl,
-      client: client,
-      interceptors: interceptors,
-      converter: converter,
-      errorConverter: errorConverter,
-      services: services);
+            baseUrl: baseUrl,
+            client: client,
+            interceptors: interceptors,
+            converter: converter,
+            errorConverter: errorConverter,
+            services: services);
 
   @override
   Future<Response<BodyType>> send<BodyType, InnerType>(Request request,
       {requestConverter, responseConverter}) async {
     Response<BodyType> response;
 
-    return super.send(request,
-        requestConverter: requestConverter,
-        responseConverter: responseConverter).catchError((e) {
+    return super
+        .send(request,
+            requestConverter: requestConverter,
+            responseConverter: responseConverter)
+        .catchError((e) {
       print(e);
-      var interceptor =
-      Config
-          .getInstance()
+      var interceptor = Config.getInstance()
           .netWorkConfig
-          .getNetWorkInterceptor();
-      if (interceptor != null){
-        interceptor.requestError(request,null);
-      }
+          .getNetWorkInterceptor()
+          .forEach((interceptor) {
+        interceptor.requestError(request, null);
+      });
     });
   }
 }

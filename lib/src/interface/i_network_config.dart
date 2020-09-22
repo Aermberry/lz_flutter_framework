@@ -32,7 +32,7 @@ abstract class INetWorkConfig {
   /**
    * 添加网络拦截
    */
-  INetWorkConfig addNetWorkInterceptor(INetWorkInterceptor iNetWorkInterceptor);
+  INetWorkConfig addNetWorkInterceptor(List<INetWorkInterceptor> iNetWorkInterceptor);
 
   String getProxy();
 
@@ -42,7 +42,7 @@ abstract class INetWorkConfig {
 
   Iterable<ChopperService> getRepository();
 
-  INetWorkInterceptor getNetWorkInterceptor();
+  List<INetWorkInterceptor> getNetWorkInterceptor();
 
   INetWorkConfig setJsonConverter(JsonToTypeConverter jsonToTypeConverter);
 
