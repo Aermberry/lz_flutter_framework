@@ -92,10 +92,8 @@ class MyChopperClient extends ChopperClient {
   @override
   Future<Response<BodyType>> send<BodyType, InnerType>(Request request,
       {requestConverter, responseConverter}) async {
-    Response<BodyType> response;
-
     return super
-        .send(request,
+        .send<BodyType, InnerType>(request,
             requestConverter: requestConverter,
             responseConverter: responseConverter)
         .catchError((e) {
