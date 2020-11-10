@@ -15,6 +15,7 @@ class NetWorkConfig extends INetWorkConfig {
   Iterable<ChopperService> _repositories;
   bool isJsonConverterEnable = true;
   JsonToTypeConverter _jsonToTypeConverter;
+  JsonToTypeConverter _errorJsonToTypeConverter;
   Duration _connectionTimeout;
 
   @override
@@ -78,6 +79,15 @@ class NetWorkConfig extends INetWorkConfig {
   @override
   INetWorkConfig setConnectionTimeout(Duration duration) {
     duration = _connectionTimeout;
+    return this;
+  }
+
+  @override
+  JsonToTypeConverter getErrorJsonConverter() => _errorJsonToTypeConverter;
+
+  @override
+  INetWorkConfig setErrorJsonConverter(JsonToTypeConverter jsonToTypeConverter) {
+    _errorJsonToTypeConverter = jsonToTypeConverter;
     return this;
   }
 

@@ -36,10 +36,8 @@ class Api {
             (request) async => requestInterceptor(request),
             (response) async => responseInterceptor(response),
           ],
-          converter:
-              Config.getInstance().netWorkConfig.getJsonConverter() == null
-                  ? null
-                  : Config.getInstance().netWorkConfig.getJsonConverter(),
+          converter: Config.getInstance().netWorkConfig.getJsonConverter(),
+          errorConverter:  Config.getInstance().netWorkConfig.getErrorJsonConverter(),
           client: httpIo.IOClient(httpClient),
           baseUrl: Config.getInstance().netWorkConfig.getDomain(),
           services: Config.getInstance().netWorkConfig.getRepository());
@@ -97,13 +95,13 @@ class MyChopperClient extends ChopperClient {
             requestConverter: requestConverter,
             responseConverter: responseConverter)
         .catchError((e) {
-      print(e);
       var interceptor = Config.getInstance()
           .netWorkConfig
           .getNetWorkInterceptor()
           .forEach((interceptor) {
         interceptor.requestError(request, null);
       });
+      throw(e);
     });
   }
 }

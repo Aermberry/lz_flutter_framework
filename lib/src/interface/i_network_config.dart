@@ -48,6 +48,10 @@ abstract class INetWorkConfig {
 
   JsonToTypeConverter getJsonConverter();
 
+  INetWorkConfig setErrorJsonConverter(JsonToTypeConverter jsonToTypeConverter);
+
+  JsonToTypeConverter getErrorJsonConverter();
+
   INetWorkConfig setConnectionTimeout(Duration duration);
 
   Duration getConnectionTimeout();
