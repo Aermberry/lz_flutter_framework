@@ -13,8 +13,9 @@ class JsonToTypeConverter extends JsonConverter {
     if ((response.body as String).isEmpty) {
       return response;
     }
+    var jsonMap = json.decode(response.body);
     return response.replace(
-      body: fromJsonData<dynamic, InnerType>(response.body, typeToJsonFactoryMap[InnerType]),
+      body: typeToJsonFactoryMap[InnerType](jsonMap),
     );
   }
 
