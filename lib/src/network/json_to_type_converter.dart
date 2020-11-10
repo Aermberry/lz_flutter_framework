@@ -9,6 +9,16 @@ class JsonToTypeConverter extends JsonConverter {
   JsonToTypeConverter(this.typeToJsonFactoryMap);
 
   @override
+  Response convertError<BodyType, InnerType>(Response response) {
+    if ((response.body as String).isEmpty) {
+      return response;
+    }
+    return response.replace(
+      body: fromJsonData<BodyType, InnerType>(response.body, typeToJsonFactoryMap[InnerType]),
+    );
+  }
+
+  @override
   Response<BodyType> convertResponse<BodyType, InnerType>(Response response) {
     if ((response.body as String).isEmpty) {
       return response;
