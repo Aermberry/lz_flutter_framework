@@ -14,7 +14,7 @@ class JsonToTypeConverter extends JsonConverter {
       return response;
     }
     return response.replace(
-      body: fromJsonData<BodyType, InnerType>(response.body, typeToJsonFactoryMap[InnerType]),
+      body: fromJsonData<dynamic, InnerType>(response.body, typeToJsonFactoryMap[InnerType]),
     );
   }
 
