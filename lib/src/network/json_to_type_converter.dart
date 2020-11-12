@@ -30,7 +30,12 @@ class JsonToTypeConverter extends JsonConverter {
   }
 
   T fromJsonData<T, InnerType>(String jsonData, Function jsonParser) {
-    var jsonMap = json.decode(jsonData);
+    dynamic jsonMap;
+    try{
+      jsonMap = json.decode(jsonData);
+    }catch(e){
+      return jsonData as T;
+    }
 
     if (jsonMap is List) {
       return jsonMap.map((item) => jsonParser(item as Map<String, dynamic>) as InnerType).toList() as T;
