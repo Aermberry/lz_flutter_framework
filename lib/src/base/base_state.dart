@@ -45,11 +45,11 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  Future<T> routeTo<T extends Object>(String routePath,{bool replace = false,bool clearStack = false,bool keepThisPage = false, Object params}){
+  Future<T> routeTo<T extends Object>(String routePath,{bool replace = false,bool clearStack = false,bool keepThisPage = false,String needKeepPageWithClearStack ,Object params}){
     if(replace){
       return Navigator.pushReplacementNamed(getContext(), routePath,arguments: params);
     } else if(clearStack){
-      return Navigator.pushNamedAndRemoveUntil(getContext(), routePath,(r) => keepThisPage, arguments: params);
+      return Navigator.pushNamedAndRemoveUntil(getContext(), routePath, needKeepPageWithClearStack == null ?  (r) => keepThisPage : ModalRoute.withName(needKeepPageWithClearStack), arguments: params);
     }else{
       return Navigator.pushNamed(getContext(), routePath,arguments: params);
     }
