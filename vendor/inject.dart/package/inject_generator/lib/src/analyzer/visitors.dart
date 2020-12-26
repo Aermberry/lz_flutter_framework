@@ -140,7 +140,7 @@ abstract class InjectClassVisitor {
 
   /// Call to start visiting [clazz].
   void visitClass(ClassElement clazz) {
-    for (var supertype in clazz.allSupertypes.where((t) => !t.isObject)) {
+    for (var supertype in clazz.allSupertypes.where((t) => !t.isDartCoreObject)) {
       new _AnnotatedClassVisitor(this).visitClassElement(supertype.element);
     }
     new _AnnotatedClassVisitor(this).visitClassElement(clazz);

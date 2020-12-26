@@ -214,7 +214,7 @@ class _ProviderSummaryVisitor extends InjectClassVisitor {
         ? (method.returnType as ParameterizedType).typeArguments.single
         : method.returnType;
 
-    if (!_checkReturnType(method, returnType.element)) {
+    if (!_checkReturnType(method, returnType)) {
       return;
     }
 
@@ -268,7 +268,7 @@ class _ProviderSummaryVisitor extends InjectClassVisitor {
 
   @override
   void visitProvideGetter(FieldElement field, bool singleton) {
-    if (!_checkReturnType(field.getter, field.getter.returnType.element)) {
+    if (!_checkReturnType(field.getter, field.getter.returnType)) {
       return;
     }
     var returnType = field.getter.returnType;
@@ -283,10 +283,10 @@ class _ProviderSummaryVisitor extends InjectClassVisitor {
   }
 
   bool _checkReturnType(
-      ExecutableElement executableElement, Element returnTypeElement) {
-    if (returnTypeElement.kind == ElementKind.DYNAMIC ||
+      ExecutableElement executableElement, DartType returnTypeElement) {
+    if (returnTypeElement.element.kind == ElementKind.DYNAMIC ||
         returnTypeElement is TypeDefiningElement &&
-            returnTypeElement.type.isDynamic) {
+            returnTypeElement.isDynamic) {
       builderContext.log.severe(
         executableElement,
         'provider return type resolved to dynamic. This can happen when the '
@@ -303,7 +303,7 @@ class _ProviderSummaryVisitor extends InjectClassVisitor {
 
 ProviderSummary _createConstructorProviderSummary(
     ConstructorElement element, bool isSingleton) {
-  var returnType = element.enclosingElement.type;
+  var returnType = element.enclosingElement.thisType;
   return new ProviderSummary(
       getInjectedType(returnType), element.name, ProviderKind.constructor,
       singleton: isSingleton,

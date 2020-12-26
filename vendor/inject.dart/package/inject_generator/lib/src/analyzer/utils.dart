@@ -11,10 +11,10 @@ import 'package:inject_generator/src/source/symbol_path.dart';
 
 /// Constructs a serializable path to [element].
 SymbolPath getSymbolPath(Element element) {
-  if (element is TypeDefiningElement && element.type.isDynamic) {
-    throw new ArgumentError('Dynamic element type not supported. This is a '
-        'package:inject bug. Please report it.');
-  }
+  // if (element is TypeDefiningElement ) {
+  //   throw new ArgumentError('Dynamic element type not supported. This is a '
+  //       'package:inject bug. Please report it.');
+  // }
   return new SymbolPath.fromAbsoluteUri(
     element.library.source.uri,
     element.name,
