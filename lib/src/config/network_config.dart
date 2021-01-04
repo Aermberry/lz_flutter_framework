@@ -10,14 +10,14 @@ import '../network/json_to_type_converter.dart';
 
 class NetWorkConfig extends INetWorkConfig {
   List<INetWorkInterceptor> _netWorkInterceptor = [HttpRequestSignatureInterceptor()];
-  String _domain;
-  String _proxy;
+  String _domain = '';
+  String _proxy = '';
   Function _httpsCertificate;
   Iterable<ChopperService> _repositories;
   bool isJsonConverterEnable = true;
   JsonToTypeConverter _jsonToTypeConverter;
   JsonToTypeConverter _errorJsonToTypeConverter;
-  Duration _connectionTimeout;
+  Duration _connectionTimeout = Duration(seconds: 60);
 
   @override
   INetWorkConfig addNetWorkInterceptor(List<INetWorkInterceptor> iNetWorkInterceptor) {
