@@ -16,6 +16,8 @@ class DebuggerConfig extends IDebuggerConfig {
   }
 
   Future addOverlayEntry(BuildContext context,double left, double top) async {
+    if(left<0 || top <0 || left > MediaQuery.of(context).size.width - 40 || top >    MediaQuery.of(context).size.height - 40)
+      return;
     var showIcon = true;
     overlayEntry?.remove();
     var icon = FloatingActionButton(
