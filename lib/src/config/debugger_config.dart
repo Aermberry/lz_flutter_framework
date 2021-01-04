@@ -41,7 +41,7 @@ class DebuggerConfig extends IDebuggerConfig {
                         if (details.offset.dx < 0 ||
                             details.offset.dy < 0 ) {
                           addOverlayEntry(
-                              context, 0,  0);
+                              context, 80,  80);
                         }else if(  details.offset.dx >
                             MediaQuery.of(context).size.width - 40 ||
                             details.offset.dy >
