@@ -27,7 +27,7 @@ class Api {
       else
         httpClient.badCertificateCallback =
             ((X509Certificate cert, String host, int port) => true);
-      if (Config.getInstance().netWorkConfig.getProxy() != null)
+      if (Config.getInstance().netWorkConfig.getProxy().isNotEmpty)
         httpClient.findProxy =
             (url) => Config.getInstance().netWorkConfig.getProxy();
 

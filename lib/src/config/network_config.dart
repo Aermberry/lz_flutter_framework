@@ -35,7 +35,7 @@ class NetWorkConfig extends INetWorkConfig {
   List<INetWorkInterceptor> getNetWorkInterceptor() => _netWorkInterceptor;
 
   @override
-  String getProxy() => _proxy.isEmpty ? null : _proxy;
+  String getProxy() => _proxy;
 
   @override
   INetWorkConfig setApiDomain(String domain) {
