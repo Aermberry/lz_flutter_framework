@@ -90,7 +90,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage> {
                                     child: Text(
                                       'Timeout: ',
                                     )),
-                                Expanded(child: Text(Config.getInstance().netWorkConfig.getConnectionTimeout().toString()))
+                                Expanded(child: Text(Config.getInstance().netWorkConfig.getConnectionTimeout()?.toString()))
                               ],
                             ),
                             Container(height: 10),
