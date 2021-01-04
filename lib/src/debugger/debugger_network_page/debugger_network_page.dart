@@ -134,7 +134,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage> {
                                                 fontWeight: FontWeight.bold)))),
                                 Expanded(
                                     child: Center(
-                                        child: Text('Fail: ${requests.where((element) => element.stateCode > 400).length}',
+                                        child: Text('Fail: ${requests.where((element) => element.stateCode >= 400).length}',
                                             style: TextStyle(
                                                 color: Colors.red,
                                                 fontWeight: FontWeight.bold)))),
