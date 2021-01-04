@@ -39,15 +39,20 @@ class DebuggerConfig extends IDebuggerConfig {
                       },
                       onDragEnd: (DraggableDetails details) {
                         if (details.offset.dx < 0 ||
-                            details.offset.dy < 0 ||
-                            details.offset.dx >
-                                MediaQuery.of(context).size.width - 40 ||
+                            details.offset.dy < 0 ) {
+                          addOverlayEntry(
+                              context, 0,  0);
+                        }else if(  details.offset.dx >
+                            MediaQuery.of(context).size.width - 40 ||
                             details.offset.dy >
-                                MediaQuery.of(context).size.height - 40) return;
-
-                        ///拖动结束
-                        addOverlayEntry(
-                            context, details.offset.dx, details.offset.dy);
+                                MediaQuery.of(context).size.height - 40){
+                          addOverlayEntry(
+                              context,  MediaQuery.of(context).size.width - 40,  MediaQuery.of(context).size.height - 40);
+                        }else{
+                          ///拖动结束
+                          addOverlayEntry(
+                              context, details.offset.dx, details.offset.dy);
+                        }
                       },
 
                       ///feedback是拖动时跟随手指滑动的Widget。
