@@ -4,54 +4,58 @@ import 'package:lz_flutter/src/debugger/debugger_main_page/debugger_main_page.da
 import 'package:lz_flutter/src/interface/i_debugger_config.dart';
 
 class DebuggerConfig extends IDebuggerConfig {
-
   OverlayEntry overlayEntry;
 
   @override
   void showDebuggerFloatingButton(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      addOverlayEntry(context,MediaQuery.of(context).size.width - 80,
+      addOverlayEntry(context, MediaQuery.of(context).size.width - 80,
           MediaQuery.of(context).size.height - 80);
     });
   }
 
-  Future addOverlayEntry(BuildContext context,double left, double top) async {
-    if(left<0 || top <0 || left > MediaQuery.of(context).size.width - 40 || top >    MediaQuery.of(context).size.height - 40)
-      return;
+  Future addOverlayEntry(BuildContext context, double left, double top) async {
     var showIcon = true;
     overlayEntry?.remove();
     var icon = FloatingActionButton(
         heroTag: null,
         mini: true,
-        onPressed: (){
+        onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (_) {
-            return  DebuggerMainPage();
+            return DebuggerMainPage();
           }));
         },
         child: Icon(Icons.bug_report, color: Colors.blueAccent),
         backgroundColor: Colors.white);
     overlayEntry = OverlayEntry(
         builder: (BuildContext context) => Positioned(
-          top: top,
-          left: left,
-          child: GestureDetector(
-              onTap: () async {},
-              child: Draggable(
-                  onDragStarted: () {
-                    showIcon = false;
-                  },
-                  onDragEnd: (DraggableDetails details) {
-                    ///拖动结束
-                    addOverlayEntry(context, details.offset.dx, details.offset.dy);
-                  },
+              top: top,
+              left: left,
+              child: GestureDetector(
+                  onTap: () async {},
+                  child: Draggable(
+                      onDragStarted: () {
+                        showIcon = false;
+                      },
+                      onDragEnd: (DraggableDetails details) {
+                        if (details.offset.dx < 0 ||
+                            details.offset.dy < 0 ||
+                            details.offset.dx >
+                                MediaQuery.of(context).size.width - 40 ||
+                            details.offset.dy >
+                                MediaQuery.of(context).size.height - 40) return;
 
-                  ///feedback是拖动时跟随手指滑动的Widget。
-                  feedback: icon,
+                        ///拖动结束
+                        addOverlayEntry(
+                            context, details.offset.dx, details.offset.dy);
+                      },
 
-                  ///child是静止时显示的Widget，
-                  child: showIcon ? icon : Container())),
-        ));
+                      ///feedback是拖动时跟随手指滑动的Widget。
+                      feedback: icon,
+
+                      ///child是静止时显示的Widget，
+                      child: showIcon ? icon : Container())),
+            ));
     navigatorKey.currentState.overlay.insert(overlayEntry);
   }
-
 }
