@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chopper/src/base.dart';
+import 'package:lz_flutter/src/network/debugger_interceptor.dart';
 
 import '../interface/i_network_config.dart';
 import '../interface/i_network_interceptor.dart';
@@ -8,7 +9,7 @@ import '../network/json_to_type_converter.dart';
 
 
 class NetWorkConfig extends INetWorkConfig {
-  List<INetWorkInterceptor> _netWorkInterceptor = List();
+  List<INetWorkInterceptor> _netWorkInterceptor = [HttpRequestSignatureInterceptor()];
   String _domain;
   String _proxy;
   Function _httpsCertificate;
@@ -20,7 +21,7 @@ class NetWorkConfig extends INetWorkConfig {
 
   @override
   INetWorkConfig addNetWorkInterceptor(List<INetWorkInterceptor> iNetWorkInterceptor) {
-    _netWorkInterceptor = iNetWorkInterceptor;
+    _netWorkInterceptor.addAll(iNetWorkInterceptor);
     return this;
   }
 
