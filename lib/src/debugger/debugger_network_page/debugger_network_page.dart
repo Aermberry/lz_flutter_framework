@@ -79,7 +79,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage> {
                                       'Proxy: ',
                                     )),
                                 Expanded(
-                                    child: Text('PROXY 192.168.31.137:8888'))
+                                    child: Text(Config.getInstance().netWorkConfig.getProxy()))
                               ],
                             ),
                             Container(height: 10),
@@ -90,7 +90,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage> {
                                     child: Text(
                                       'Timeout: ',
                                     )),
-                                Expanded(child: Text('15s'))
+                                Expanded(child: Text(Config.getInstance().netWorkConfig.getConnectionTimeout().toString()))
                               ],
                             ),
                             Container(height: 10),
@@ -103,8 +103,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage> {
                                       'Domain: ',
                                     )),
                                 Expanded(
-                                    child: Text(
-                                        'https://skip-dev-hk.liangzhicn.com/app/api/v1'))
+                                    child: Text(Config.getInstance().netWorkConfig.getDomain()))
                               ],
                             ),
                             Container(height: 10),
@@ -126,16 +125,16 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage> {
                             ),
                             Container(height: 15),
                             Row(
-                              children: const [
+                              children:  [
                                 Expanded(
                                     child: Center(
-                                        child: Text('Success: 10',
+                                        child: Text('Success: ${requests.where((element) => element.stateCode < 400).length}',
                                             style: TextStyle(
                                                 color: Colors.green,
                                                 fontWeight: FontWeight.bold)))),
                                 Expanded(
                                     child: Center(
-                                        child: Text('Fail: 0',
+                                        child: Text('Fail: ${requests.where((element) => element.stateCode > 400).length}',
                                             style: TextStyle(
                                                 color: Colors.red,
                                                 fontWeight: FontWeight.bold)))),
