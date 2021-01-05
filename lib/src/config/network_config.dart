@@ -79,7 +79,7 @@ class NetWorkConfig extends INetWorkConfig {
 
   @override
   INetWorkConfig setConnectionTimeout(Duration duration) {
-    duration = _connectionTimeout;
+    _connectionTimeout = duration;
     return this;
   }
 
