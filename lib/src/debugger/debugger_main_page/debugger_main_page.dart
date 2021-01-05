@@ -125,10 +125,12 @@ class DebuggerMainPageState extends BaseState<DebuggerMainPage>
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: const [
-                                    Icon(
-                                      Icons.bug_report,
-                                      color: Colors.redAccent,
-                                    ),
+                                    Hero(
+                                        tag: 'bug_icon',
+                                        child: Icon(
+                                          Icons.bug_report,
+                                          color: Colors.redAccent,
+                                        )),
                                     Text(
                                       'Exception',
                                       style: TextStyle(

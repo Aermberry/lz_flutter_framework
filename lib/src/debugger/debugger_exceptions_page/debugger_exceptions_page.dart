@@ -39,11 +39,11 @@ class _DebuggerExceptionsPageState extends State<DebuggerExceptionsPage> {
                               fontWeight: FontWeight.bold, fontSize: 30))),
                   Hero(
                       tag: 'bug_icon',
-                      child: Icon(
+                      child:   Icon(
                         Icons.bug_report,
-                        color: Colors.blueAccent,
+                        color: Colors.redAccent,
                         size: 30,
-                      )),
+                      ),),
                 ],
               ),
               for (LZFlutterErrorDetail errorDetail in errors)
