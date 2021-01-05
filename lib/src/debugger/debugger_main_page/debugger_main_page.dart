@@ -29,7 +29,7 @@ class DebuggerMainPageState extends BaseState<DebuggerMainPage>
   }
 
   @override
-  Widget build(BuildContext context) => appName == null
+  Widget build(BuildContext context) => packageName == null
       ? Container()
       : Scaffold(
           appBar: AppBar(
