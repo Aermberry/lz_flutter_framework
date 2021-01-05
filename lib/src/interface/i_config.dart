@@ -14,6 +14,4 @@ abstract class IConfig {
 
   IDebuggerConfig debuggerConfig;
 
-  IConfig init();
-
 }

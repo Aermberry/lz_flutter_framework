@@ -16,20 +16,16 @@ import 'resource_config.dart';
 class Config extends IConfig {
   static IConfig _instance;
 
-  Config();
+  Config(){
+    netWorkConfig = NetWorkConfig();
+    resourceConfig = ResourceConfig();
+    debuggerConfig = DebuggerConfig();
+  }
 
   static IConfig getInstance() {
     if (_instance == null) _instance = Config();
     return _instance;
   }
 
-  @override
-  IConfig init() {
-    netWorkConfig = NetWorkConfig();
-    resourceConfig = ResourceConfig();
-    debuggerConfig = DebuggerConfig();
-
-    return this;
-  }
 
 }
