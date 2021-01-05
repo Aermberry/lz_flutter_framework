@@ -12,4 +12,6 @@ abstract class IDebuggerConfig {
 
   void showDebuggerFloatingButton(BuildContext buildContext);
 
+  void startCatchAllException();
+
 }

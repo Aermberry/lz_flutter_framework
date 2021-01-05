@@ -1,7 +1,10 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:lz_flutter/src/debugger/debugger_main_page/debugger_main_page.dart';
+import 'package:lz_flutter/src/debugger/domain/lz_flutter_error_detail.dart';
 import 'package:lz_flutter/src/interface/i_debugger_config.dart';
+
+List<LZFlutterErrorDetail> flutterErrorDetails = [];
 
 class DebuggerConfig extends IDebuggerConfig {
   OverlayEntry overlayEntry;
@@ -63,4 +66,13 @@ class DebuggerConfig extends IDebuggerConfig {
             ));
     navigatorKey.currentState.overlay.insert(overlayEntry);
   }
+
+  @override
+  void startCatchAllException() {
+    WidgetsFlutterBinding.ensureInitialized();
+    FlutterError.onError = (details) {
+      flutterErrorDetails.add(LZFlutterErrorDetail(DateTime.now(),details));
+    };
+  }
+
 }

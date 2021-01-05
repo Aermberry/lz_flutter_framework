@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lz_flutter/flutter_base.dart';
+import 'package:lz_flutter/src/debugger/debugger_exceptions_page/debugger_exceptions_page.dart';
 import 'package:lz_flutter/src/debugger/debugger_network_page/debugger_network_page.dart';
 import 'package:package_info/package_info.dart';
 
@@ -113,19 +114,28 @@ class DebuggerMainPageState extends BaseState<DebuggerMainPage>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Icon(
-                                  Icons.bug_report,
-                                  color: Colors.redAccent,
-                                ),
-                                Text(
-                                  'Exception',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              DebuggerExceptionsPage()));
+                                },
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: const [
+                                    Icon(
+                                      Icons.bug_report,
+                                      color: Colors.redAccent,
+                                    ),
+                                    Text(
+                                      'Exception',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                )),
                             Container(
                                 height: 50,
                                 width: 1,
@@ -148,8 +158,8 @@ class DebuggerMainPageState extends BaseState<DebuggerMainPage>
                                           color: Colors.blueAccent,
                                         )),
                                     Text('Network',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold))
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold))
                                   ],
                                 )),
                           ],
