@@ -72,6 +72,7 @@ class DebuggerConfig extends IDebuggerConfig {
     WidgetsFlutterBinding.ensureInitialized();
     FlutterError.onError = (details) {
       flutterErrorDetails.add(LZFlutterErrorDetail(DateTime.now(),details));
+      throw(details);
     };
   }
 
