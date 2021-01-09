@@ -25,20 +25,29 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
+  #ioc依赖注入
   inject:
     path: ./vendor/inject.dart/package/inject
+  #lz_flutter 框架
   lz_flutter:
-    git:
-      url: http://gitlab.liangzhicn.com/lz-flutter/lz-flutter.git
-      ref: '1.1.8'
+    path: /Users/android/project/lz-flutter
+  #toast提示
   fluttertoast: ^3.1.3
+  #网络请求
   chopper: ^2.5.3
+  #时间格式
+  date_format: ^1.0.9
+  #数据库
   floor: ^0.18.0
   synchronized: '>=1.5.1 <4.0.0'
+  #缓存
   shared_preferences: '>=0.4.1 <3.0.0'
+  #路径
   path_provider: '1.6.11'
   json_annotation: ^3.0.0
+  #设备信息
   device_info: 0.2.0
+  #包信息
   package_info: ^0.4.0+4
 
 dev_dependencies:
