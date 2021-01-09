@@ -79,7 +79,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage> {
                                       'Proxy: ',
                                     )),
                                 Expanded(
-                                    child: Text(Config.getInstance().netWorkConfig.getProxy()) ?? '')
+                                    child: Text(Config.getInstance().netWorkConfig.getProxy() ?? ''))
                               ],
                             ),
                             Container(height: 10),
