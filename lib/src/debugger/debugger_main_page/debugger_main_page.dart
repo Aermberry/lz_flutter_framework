@@ -46,7 +46,7 @@ class DebuggerMainPageState extends BaseState<DebuggerMainPage>
                 'LZ Debugger',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
-              const Text('version: 1.1.9'),
+              const Text('version: 1.2.0'),
               Container(height: 18),
               Card(
                   margin: const EdgeInsets.all(15),

@@ -1,6 +1,7 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:lz_flutter/src/config/debugger_config.dart';
+import 'package:lz_flutter/src/debugger/debugger_exceptions_detail_page/debugger_exceptions_detail_page.dart';
 import 'package:lz_flutter/src/debugger/domain/lz_flutter_error_detail.dart';
 
 class DebuggerExceptionsPage extends StatefulWidget {
@@ -47,6 +48,12 @@ class _DebuggerExceptionsPageState extends State<DebuggerExceptionsPage> {
                 ],
               ),
               for (LZFlutterErrorDetail errorDetail in errors)
+                InkWell(onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_) {
+                    return DebuggerExceptionsDetailPage(errorDetail,'detail${errors.indexOf(errorDetail)}');
+                  }));
+                },child: 
+                    Hero(tag: 'detail${errors.indexOf(errorDetail)}', child: 
                 Card(
                     margin: const EdgeInsets.fromLTRB(3, 10, 3, 5),
                     shape: const RoundedRectangleBorder(
@@ -62,8 +69,8 @@ class _DebuggerExceptionsPageState extends State<DebuggerExceptionsPage> {
                               errorDetail.details.exception.toString(),
                               textAlign: TextAlign.start,
                               style:
-                              const TextStyle(fontWeight: FontWeight.w900),
-                              maxLines: 3,
+                              const TextStyle(fontWeight: FontWeight.w900,fontSize: 16),
+                              maxLines: 3
                             ),
                             Container(height: 10),
                             Text(
@@ -71,7 +78,7 @@ class _DebuggerExceptionsPageState extends State<DebuggerExceptionsPage> {
                               maxLines: 10,
                             ),
                           ],
-                        )))
+                        )))))
             ],
           ))));
 }

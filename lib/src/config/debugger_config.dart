@@ -8,13 +8,17 @@ List<LZFlutterErrorDetail> flutterErrorDetails = [];
 
 class DebuggerConfig extends IDebuggerConfig {
   OverlayEntry overlayEntry;
+  bool isShow = false;
 
   @override
   void showDebuggerFloatingButton(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      addOverlayEntry(context, MediaQuery.of(context).size.width - 80,
-          MediaQuery.of(context).size.height - 80);
-    });
+    if(!isShow){
+      isShow = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        addOverlayEntry(context, MediaQuery.of(context).size.width - 80,
+            MediaQuery.of(context).size.height - 80);
+      });
+    }
   }
 
   Future addOverlayEntry(BuildContext context, double left, double top) async {
@@ -72,7 +76,7 @@ class DebuggerConfig extends IDebuggerConfig {
     WidgetsFlutterBinding.ensureInitialized();
     FlutterError.onError = (details) {
       flutterErrorDetails.add(LZFlutterErrorDetail(DateTime.now(),details));
-      throw(details);
+      print(details);
     };
   }
 
