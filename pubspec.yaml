@@ -30,7 +30,9 @@ dependencies:
     path: ./vendor/inject.dart/package/inject
   #lz_flutter 框架
   lz_flutter:
-    path: /Users/android/project/lz-flutter
+    git:
+      url: http://gitlab.liangzhicn.com/lz-flutter/lz-flutter.git
+      ref: '1.2.0'
   #toast提示
   fluttertoast: ^3.1.3
   #网络请求
