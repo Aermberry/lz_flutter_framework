@@ -35,7 +35,7 @@ class DebuggerConfig extends IDebuggerConfig {
         child: Icon(Icons.bug_report, color: Colors.blueAccent),
         backgroundColor: Colors.white);
     overlayEntry = OverlayEntry(
-        builder: (BuildContext context) => Positioned(
+        builder: (BuildContext buildContext) => Positioned(
               top: top,
               left: left,
               child: GestureDetector(
