@@ -49,9 +49,9 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
     if(replace){
       return Navigator.pushReplacementNamed(getContext(), routePath,arguments: params);
     } else if(clearStack){
-      return Navigator.pushNamedAndRemoveUntil(getContext(), routePath, needKeepPageWithClearStack == null ?  (r) => keepThisPage : ModalRoute.withName(needKeepPageWithClearStack), arguments: params);
+      return Navigator.pushNamedAndRemoveUntil<T>(getContext(), routePath, needKeepPageWithClearStack == null ?  (r) => keepThisPage : ModalRoute.withName(needKeepPageWithClearStack), arguments: params);
     }else{
-      return Navigator.pushNamed(getContext(), routePath,arguments: params);
+      return Navigator.pushNamed<T>(getContext(), routePath,arguments: params);
     }
   }
 
