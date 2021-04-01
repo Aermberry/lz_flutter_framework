@@ -15,12 +15,14 @@ class HttpRequestSignatureInterceptor extends INetWorkInterceptor {
 
   @override
   Response requestAfter(Response response) {
-    final request = response.base.request as http.Request;
-    final requestData = RequestData(request.headers,request.body);
-    final responseData = RequestData(response.headers, jsonEncode(response.body));
-    networkResults.add(    RequestResult(
-        response.statusCode, request.method, request.url.path.split('/v1/').last, DateTime.now(),
-        request: requestData, response: responseData));
+    if(response.base.request is http.Request){
+      final request = response.base.request as http.Request;
+      final requestData = RequestData(request.headers,request.body);
+      final responseData = RequestData(response.headers, jsonEncode(response.body));
+      networkResults.add(    RequestResult(
+          response.statusCode, request.method, request.url.path.split('/v1/').last, DateTime.now(),
+          request: requestData, response: responseData));
+    }
     return response;
   }
 
