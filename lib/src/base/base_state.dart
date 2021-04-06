@@ -18,8 +18,9 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  void showLoadingDialog([String msg]) {
+  void showLoadingDialog({String msg,bool barrierDismissible = false}) {
     showDialog(
+        barrierDismissible: barrierDismissible,
         context: getContext(),
         builder: (context) {
           return LoadingDialog(

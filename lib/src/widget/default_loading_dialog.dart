@@ -27,7 +27,7 @@ class LoadingDialog extends Dialog {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 new CircularProgressIndicator(),
-                new Padding(
+                text == null ? Container() : new Padding(
                   padding: const EdgeInsets.only(
                     top: 20.0,
                   ),

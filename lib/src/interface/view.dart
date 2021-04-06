@@ -11,7 +11,7 @@ abstract class View {
 
   void showMsgByToast(String msg);
 
-  void showLoadingDialog([String msg]);
+  void showLoadingDialog({String msg,bool barrierDismissible = false});
 
   void hideLoadingDialog();
 
