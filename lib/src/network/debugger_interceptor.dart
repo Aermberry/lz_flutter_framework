@@ -9,7 +9,7 @@ List<RequestResult> networkResults = [];
 class HttpRequestSignatureInterceptor extends INetWorkInterceptor {
 
   @override
-  Request requestBefore(Request request) {
+  Future<Request> requestBefore(Request request) async {
     return request;
   }
 
