@@ -45,14 +45,13 @@ class Api {
     return _chopperClient;
   }
 
-  Request requestInterceptor(Request request) {
+  Future<Request> requestInterceptor(Request request)  async {
     Request requestBefore = request;
-    Config.getInstance()
+    for (var value in Config.getInstance()
         .netWorkConfig
-        .getNetWorkInterceptor()
-        .forEach((interceptor) {
-      requestBefore = interceptor.requestBefore(requestBefore);
-    });
+        .getNetWorkInterceptor()) {
+      requestBefore = await value.requestBefore(requestBefore);
+    }
     return requestBefore;
   }
 
