@@ -2,7 +2,7 @@ import 'package:chopper/chopper.dart';
 
 abstract class INetWorkInterceptor{
 
-  Request requestBefore(Request request);
+  Future<Request> requestBefore(Request request);
 
   Response requestAfter(Response response);
 
