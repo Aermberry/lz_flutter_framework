@@ -21,6 +21,6 @@ abstract class View {
 
   void refresh();
 
-  Future<T> routeTo<T extends Object>(String routePath,{bool replace = false,bool clearStack = false,bool keepThisPage = false, Object params});
+  Future<T> routeTo<T extends Object>(Route<T> newRoute,{bool replace = false,bool clearStack = false,RoutePredicate predicate});
 
 }
