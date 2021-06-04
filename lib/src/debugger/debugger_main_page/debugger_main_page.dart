@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lz_flutter/flutter_base.dart';
 import 'package:lz_flutter/src/debugger/debugger_exceptions_page/debugger_exceptions_page.dart';
 import 'package:lz_flutter/src/debugger/debugger_network_page/debugger_network_page.dart';
-import 'package:package_info/package_info.dart';
-
 import 'debugger_main_presenter.dart';
 import 'debugger_main_view.dart';
 

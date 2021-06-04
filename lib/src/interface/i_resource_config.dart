@@ -1,10 +1,3 @@
-import 'dart:io';
-
-import 'package:chopper/chopper.dart';
-import 'package:flutter/cupertino.dart';
-
-import 'i_network_interceptor.dart';
-
 abstract class IResourceConfig {
 
   /**

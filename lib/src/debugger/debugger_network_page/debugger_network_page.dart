@@ -104,7 +104,6 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage>
                                       child: Text(Config.getInstance()
                                               .netWorkConfig
                                               .getConnectionTimeout()
-                                              ?.inMilliseconds
                                               .toString() +
                                           ' ms'))
                                 ],

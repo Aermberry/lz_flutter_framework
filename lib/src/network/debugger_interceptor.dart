@@ -1,33 +1,22 @@
 import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:lz_flutter/src/debugger/domain/request_result.dart';
+import 'package:lz_flutter/src/network/network_interceptor.dart';
 import '../../flutter_base.dart';
 
 List<RequestResult> networkResults = [];
 
-class HttpRequestSignatureInterceptor extends INetWorkInterceptor {
+class DebuggerInterceptor extends NetWorkInterceptor {
 
   @override
-  Future<Request> requestBefore(Request request) async {
-    return request;
-  }
-
-  @override
-  Response requestAfter(Response response) {
-    if(response.base.request is http.Request){
-      final request = response.base.request as http.Request;
-      final requestData = RequestData(request.headers,request.body);
-      final responseData = RequestData(response.headers, jsonEncode(response.body));
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    super.onResponse(response, handler);
+      final request = response.requestOptions;
+      final requestData = RequestData(request.headers,request.data);
+      final responseData = RequestData(response.headers.map, jsonEncode(response.data));
       networkResults.add(    RequestResult(
-          response.statusCode, request.method, request.url.path.split('/v1/').last, DateTime.now(),
+          response.statusCode, request.method, request.path, DateTime.now(),
           request: requestData, response: responseData));
-    }
-    return response;
   }
-
-
-  @override
-  void requestError(Request request, Response<dynamic> response) {}
 
 }

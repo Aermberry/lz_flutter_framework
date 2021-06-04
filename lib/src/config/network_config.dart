@@ -1,27 +1,19 @@
 import 'dart:io';
-
-import 'package:chopper/src/base.dart';
+import 'package:dio/src/dio.dart';
+import 'package:lz_flutter/flutter_base.dart';
 import 'package:lz_flutter/src/network/debugger_interceptor.dart';
-
 import '../interface/i_network_config.dart';
-import '../interface/i_network_interceptor.dart';
-import '../network/json_to_type_converter.dart';
 
 
 class NetWorkConfig extends INetWorkConfig {
-  List<INetWorkInterceptor> _netWorkInterceptor = [HttpRequestSignatureInterceptor()];
+  List<NetWorkInterceptor> _netWorkInterceptor = [DebuggerInterceptor()];
   String _domain = '';
   String _proxy = '';
-  Function _httpsCertificate;
-  Iterable<ChopperService> _repositories;
-  bool isJsonConverterEnable = true;
-  JsonToTypeConverter _jsonToTypeConverter;
-  JsonToTypeConverter _errorJsonToTypeConverter;
-  Duration _connectionTimeout = Duration(seconds: 60);
+  int _connectionTimeout = 30 * 1000;
 
   @override
-  INetWorkConfig addNetWorkInterceptor(List<INetWorkInterceptor> iNetWorkInterceptor) {
-    _netWorkInterceptor.addAll(iNetWorkInterceptor);
+  INetWorkConfig addNetWorkInterceptor(List<NetWorkInterceptor> netWorkInterceptors) {
+    _netWorkInterceptor.addAll(netWorkInterceptors);
     return this;
   }
 
@@ -29,10 +21,7 @@ class NetWorkConfig extends INetWorkConfig {
   String getDomain() => _domain;
 
   @override
-  Function getHttpsCertificate() => _httpsCertificate;
-
-  @override
-  List<INetWorkInterceptor> getNetWorkInterceptor() => _netWorkInterceptor;
+  List<NetWorkInterceptor> getNetWorkInterceptor() => _netWorkInterceptor;
 
   @override
   String getProxy() => _proxy;
@@ -44,52 +33,20 @@ class NetWorkConfig extends INetWorkConfig {
   }
 
   @override
-  INetWorkConfig setHttpsCertificate(
-      bool Function(X509Certificate cert, String host, int port) callback) {
-    _httpsCertificate = callback;
-    return this;
-  }
-
-  @override
   INetWorkConfig setProxy(String proxy) {
     _proxy = proxy;
     return this;
   }
 
-  @override
-  Iterable<ChopperService> getRepository() => _repositories;
 
   @override
-  INetWorkConfig setRepository(Iterable<ChopperService> repositories) {
-    _repositories = repositories;
+  int getConnectionTimeout() => _connectionTimeout;
+
+  @override
+  INetWorkConfig setConnectionTimeout(int connectionTimeout) {
+    _connectionTimeout = connectionTimeout;
     return this;
   }
 
-  @override
-  JsonToTypeConverter getJsonConverter() => _jsonToTypeConverter;
-
-  @override
-  INetWorkConfig setJsonConverter(JsonToTypeConverter jsonToTypeConverter) {
-    _jsonToTypeConverter = jsonToTypeConverter;
-    return this;
-  }
-
-  @override
-  Duration getConnectionTimeout() => _connectionTimeout;
-
-  @override
-  INetWorkConfig setConnectionTimeout(Duration duration) {
-    _connectionTimeout = duration;
-    return this;
-  }
-
-  @override
-  JsonToTypeConverter getErrorJsonConverter() => _errorJsonToTypeConverter;
-
-  @override
-  INetWorkConfig setErrorJsonConverter(JsonToTypeConverter jsonToTypeConverter) {
-    _errorJsonToTypeConverter = jsonToTypeConverter;
-    return this;
-  }
 
 }
