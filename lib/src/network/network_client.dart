@@ -23,4 +23,6 @@ class Api {
     return _dio;
   }
 
+  static Dio getService<T>() => Config.getInstance().netWorkConfig.getRepositories().firstWhere((e) => e.runtimeType == T);
+
 }

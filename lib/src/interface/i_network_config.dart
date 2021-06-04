@@ -30,4 +30,9 @@ abstract class INetWorkConfig {
 
   int getConnectionTimeout();
 
+  INetWorkConfig setRepository(List<dynamic> repository);
+
+  List<dynamic> getRepositories();
+
+
 }

@@ -10,6 +10,7 @@ class NetWorkConfig extends INetWorkConfig {
   String _domain = '';
   String _proxy = '';
   int _connectionTimeout = 30 * 1000;
+  List<dynamic> _repositories = [];
 
   @override
   INetWorkConfig addNetWorkInterceptor(List<NetWorkInterceptor> netWorkInterceptors) {
@@ -45,6 +46,15 @@ class NetWorkConfig extends INetWorkConfig {
   @override
   INetWorkConfig setConnectionTimeout(int connectionTimeout) {
     _connectionTimeout = connectionTimeout;
+    return this;
+  }
+
+  @override
+  List getRepositories() => _repositories;
+
+  @override
+  INetWorkConfig setRepository(List<dynamic> repositories) {
+    _repositories = repositories;
     return this;
   }
 
