@@ -13,12 +13,12 @@ class DebuggerMainPage extends StatefulWidget {
 class DebuggerMainPageState extends BaseState<DebuggerMainPage>
     implements DebuggerMainView {
   DebuggerMainPresenter _presenter = DebuggerMainPresenter();
-  String appName;
-  String packageName;
-  String version;
-  String buildNumber;
-  String system;
-  String model;
+  late String appName;
+  late String packageName;
+  late String version;
+  late String buildNumber;
+  late String system;
+  late String model;
 
   @override
   void initState() {

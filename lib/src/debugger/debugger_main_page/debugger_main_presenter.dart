@@ -6,8 +6,8 @@ import 'package:package_info/package_info.dart';
 import 'debugger_main_view.dart';
 
 class DebuggerMainPresenter {
-  DebuggerMainView _view;
-  PackageInfo packageInfo;
+  late DebuggerMainView _view;
+  late PackageInfo packageInfo;
 
   void bind(DebuggerMainView view){
     _view = view;

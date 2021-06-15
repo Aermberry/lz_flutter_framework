@@ -37,7 +37,7 @@ class ScreenUtil {
   double _statusBarHeight = 0.0;
   double _bottomBarHeight = 0.0;
   double _appBarHeight = 0.0;
-  MediaQueryData _mediaQueryData;
+  MediaQueryData? _mediaQueryData;
 
   static final ScreenUtil _singleton = ScreenUtil();
 
@@ -83,7 +83,7 @@ class ScreenUtil {
   double get bottomBarHeight => _bottomBarHeight;
 
   /// media Query Data
-  MediaQueryData get mediaQueryData => _mediaQueryData;
+  MediaQueryData? get mediaQueryData => _mediaQueryData;
 
   /// screen width
   /// 当前屏幕 宽

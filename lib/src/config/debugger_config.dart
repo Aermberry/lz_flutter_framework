@@ -7,14 +7,14 @@ import 'package:lz_flutter/src/interface/i_debugger_config.dart';
 List<LZFlutterErrorDetail> flutterErrorDetails = [];
 
 class DebuggerConfig extends IDebuggerConfig {
-  OverlayEntry overlayEntry;
+  OverlayEntry? overlayEntry;
   bool isShow = false;
 
   @override
   void showDebuggerFloatingButton(BuildContext context) {
     if(!isShow){
       isShow = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
         addOverlayEntry(context, MediaQuery.of(context).size.width - 80,
             MediaQuery.of(context).size.height - 80);
       });
@@ -68,7 +68,7 @@ class DebuggerConfig extends IDebuggerConfig {
                       ///child是静止时显示的Widget，
                       child: showIcon ? icon : Container())),
             ));
-    navigatorKey.currentState.overlay.insert(overlayEntry);
+    navigatorKey.currentState?.overlay?.insert(overlayEntry!);
   }
 
   @override

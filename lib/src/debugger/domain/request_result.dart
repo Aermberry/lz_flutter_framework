@@ -4,8 +4,8 @@ class RequestResult{
   String method;
   String methodName;
   DateTime time;
-  RequestData request;
-  RequestData response;
+  RequestData? request;
+  RequestData? response;
 
   RequestResult(this.stateCode,this.method,this.methodName,this.time,{this.request,this.response});
 

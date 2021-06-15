@@ -5,10 +5,10 @@ class SignatureKey {
       '11519321960057750654331295158379994524690748001772963568222336839227172235423');
   BigInt _g = BigInt.parse('35916487252541714567687225850122353847');
 
-  BigInt clientSecretKey;
-  BigInt clientPublicKey;
-  BigInt serverPublicKey;
-  BigInt signatureSecret;
+  BigInt? clientSecretKey;
+  BigInt? clientPublicKey;
+  BigInt? serverPublicKey;
+  BigInt? signatureSecret;
 
   SignatureKey();
 
@@ -44,12 +44,12 @@ class SignatureKey {
     }
     final res = stringBuffer.toString();
     clientSecretKey = BigInt.parse(res); // 客户端私钥
-    clientPublicKey = _g.modPow(clientSecretKey, _p); // 客户端公钥
+    clientPublicKey = _g.modPow(clientSecretKey!, _p); // 客户端公钥
   }
 
   void resetServerKey(BigInt serverPublicKey) {
     this.serverPublicKey = serverPublicKey;
-    signatureSecret = serverPublicKey.modPow(clientSecretKey, _p);
+    signatureSecret = serverPublicKey.modPow(clientSecretKey!, _p);
   }
 
   bool get isReadyToSign => signatureSecret != null;

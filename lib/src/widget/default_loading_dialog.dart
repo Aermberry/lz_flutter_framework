@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LoadingDialog extends Dialog {
-  final String text;
+  final String? text;
 
-  LoadingDialog({Key key, @required this.text}) : super(key: key);
+  LoadingDialog({Key? key, @required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class LoadingDialog extends Dialog {
                   padding: const EdgeInsets.only(
                     top: 20.0,
                   ),
-                  child: new Text(text),
+                  child: new Text(text!),
                 ),
               ],
             ),

@@ -7,10 +7,10 @@ import 'i_resource_config.dart';
 
 abstract class IConfig {
 
-  IResourceConfig resourceConfig;
+  late IResourceConfig resourceConfig;
 
-  INetWorkConfig netWorkConfig;
+  late INetWorkConfig netWorkConfig;
 
-  IDebuggerConfig debuggerConfig;
+  late IDebuggerConfig debuggerConfig;
 
 }

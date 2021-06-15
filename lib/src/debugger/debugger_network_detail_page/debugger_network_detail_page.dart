@@ -17,14 +17,14 @@ class DebuggerNetworkDetailPage extends StatefulWidget {
 class _DebuggerNetworkDetailPageState
     extends BaseState<DebuggerNetworkDetailPage>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  RequestData _requestData;
+  late TabController _tabController;
+  late RequestData? _requestData;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _requestData = widget.result.request;
+    _requestData = widget.result.request!;
   }
 
   @override
@@ -173,7 +173,7 @@ class _DebuggerNetworkDetailPageState
 
   Widget getHeaderWidget() {
     List<Widget> children = [];
-    _requestData.header.forEach((key, value) {
+    _requestData!.header.forEach((key, value) {
       children.add(Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -197,7 +197,7 @@ class _DebuggerNetworkDetailPageState
   }
 
   Widget getBodyWidget() => Padding(
-      padding: const EdgeInsets.all(10), child: Text(_requestData.body));
+      padding: const EdgeInsets.all(10), child: Text(_requestData?.body ?? ''));
 
   Color getStateCodeColor(int stateCode) {
     if (stateCode < 300) {

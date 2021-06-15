@@ -12,8 +12,8 @@ class DebuggerNetworkPage extends StatefulWidget {
 
 class _DebuggerNetworkPageState extends State<DebuggerNetworkPage>
     with SingleTickerProviderStateMixin {
-  List<RequestResult> requests;
-  TabController _tabController;
+  List<RequestResult> requests = [];
+  late TabController _tabController;
 
   @override
   void initState() {

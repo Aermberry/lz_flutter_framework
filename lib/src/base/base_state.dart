@@ -18,7 +18,7 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  void showLoadingDialog({String msg,bool barrierDismissible = false}) {
+  void showLoadingDialog({String? msg,bool barrierDismissible = false}) {
     showDialog(
         barrierDismissible: barrierDismissible,
         context: getContext(),
@@ -36,7 +36,7 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  void pop({Object result}) {
+  void pop({Object? result}) {
     Navigator.of(getContext()).pop(result);
   }
 
@@ -46,11 +46,11 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  Future<T> routeTo<T extends Object>(Route<T> newRoute,{bool replace = false,bool clearStack = false,RoutePredicate predicate}) async {
+  Future<T?> routeTo<T extends Object>(Route<T> newRoute,{bool replace = false,bool clearStack = false,RoutePredicate? predicate}) async {
     if(replace){
       return Navigator.pushReplacement(getContext(), newRoute);
     } else if(clearStack){
-      return Navigator.pushAndRemoveUntil(getContext(), newRoute, predicate ?? (route) => route = null);
+      return Navigator.pushAndRemoveUntil(getContext(), newRoute, predicate ?? (route) => false);
     }else{
       return Navigator.push<T>(getContext(), newRoute);
     }

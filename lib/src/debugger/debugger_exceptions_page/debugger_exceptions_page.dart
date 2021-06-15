@@ -10,7 +10,7 @@ class DebuggerExceptionsPage extends StatefulWidget {
 }
 
 class _DebuggerExceptionsPageState extends State<DebuggerExceptionsPage> {
-  List<LZFlutterErrorDetail> errors;
+  List<LZFlutterErrorDetail> errors = [];
 
   @override
   void initState() {

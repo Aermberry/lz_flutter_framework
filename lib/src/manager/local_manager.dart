@@ -5,11 +5,11 @@ import '../config/config.dart';
 
 class LocalManager {
 
-  static LocalManager _instance;
+  static LocalManager? _instance;
 
   static LocalManager getInstance() {
     if (_instance == null) _instance = LocalManager();
-    return _instance;
+    return _instance!;
   }
 
   String local(BuildContext context,String key) {
@@ -37,7 +37,7 @@ class LocalManager {
       return Config.getInstance().resourceConfig.getCurrentLanguageCode();
     var local = Localizations.localeOf(context);
     if(withArea)
-      return local.languageCode + "-" + local.countryCode;
+      return local.languageCode + "-" + (local.countryCode ?? '');
     else
       return local.languageCode;
   }

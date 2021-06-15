@@ -9,7 +9,7 @@ import 'resource_config.dart';
  */
 
 class Config extends IConfig {
-  static IConfig _instance;
+  static IConfig? _instance;
 
   Config(){
     netWorkConfig = NetWorkConfig();
@@ -18,8 +18,10 @@ class Config extends IConfig {
   }
 
   static IConfig getInstance() {
-    if (_instance == null) _instance = Config();
-    return _instance;
+    if (_instance == null){
+      _instance = Config();
+    }
+    return _instance!;
   }
 
 

@@ -15,7 +15,7 @@ class DebuggerInterceptor extends NetWorkInterceptor {
       final requestData = RequestData(request.headers,request.data);
       final responseData = RequestData(response.headers.map, jsonEncode(response.data));
       networkResults.add(    RequestResult(
-          response.statusCode, request.method, request.path, DateTime.now(),
+          response.statusCode ?? 0, request.method, request.path, DateTime.now(),
           request: requestData, response: responseData));
   }
 
