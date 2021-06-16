@@ -88,8 +88,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage>
                                   Expanded(
                                       child: Text(Config.getInstance()
                                               .netWorkConfig
-                                              .getProxy() ??
-                                          ''))
+                                              .getProxy()))
                                 ],
                               ),
                               Container(height: 10),
@@ -120,8 +119,7 @@ class _DebuggerNetworkPageState extends State<DebuggerNetworkPage>
                                   Expanded(
                                       child: Text(Config.getInstance()
                                               .netWorkConfig
-                                              .getDomain() ??
-                                          ''))
+                                              .getDomain()))
                                 ],
                               ),
                               Container(height: 10),

@@ -20,9 +20,9 @@ abstract class INetWorkConfig {
    */
   INetWorkConfig addNetWorkInterceptor(List<NetWorkInterceptor> iNetWorkInterceptor);
 
-  String? getProxy();
+  String getProxy();
 
-  String? getDomain();
+  String getDomain();
 
   List<NetWorkInterceptor> getNetWorkInterceptor();
 
