@@ -12,7 +12,7 @@ class DebuggerInterceptor extends NetWorkInterceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     super.onResponse(response, handler);
       final request = response.requestOptions;
-      final requestData = RequestData(request.headers,request.data);
+      final requestData = RequestData(request.headers,jsonEncode(request.data));
       final responseData = RequestData(response.headers.map, jsonEncode(response.data));
       networkResults.add(    RequestResult(
           response.statusCode ?? 0, request.method, request.path, DateTime.now(),
