@@ -8,7 +8,7 @@ import '../interface/i_network_config.dart';
 class NetWorkConfig extends INetWorkConfig {
   List<NetWorkInterceptor> _netWorkInterceptor = [DebuggerInterceptor()];
   String _domain = '';
-  String _proxy = '';
+  String? _proxy = '';
   int _connectionTimeout = 30 * 1000;
   List<dynamic> _repositories = [];
 
@@ -25,7 +25,7 @@ class NetWorkConfig extends INetWorkConfig {
   List<NetWorkInterceptor> getNetWorkInterceptor() => _netWorkInterceptor;
 
   @override
-  String getProxy() => _proxy;
+  String? getProxy() => _proxy;
 
   @override
   INetWorkConfig setApiDomain(String domain) {
@@ -34,7 +34,7 @@ class NetWorkConfig extends INetWorkConfig {
   }
 
   @override
-  INetWorkConfig setProxy(String proxy) {
+  INetWorkConfig setProxy(String? proxy) {
     _proxy = proxy;
     return this;
   }

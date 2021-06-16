@@ -8,7 +8,7 @@ abstract class INetWorkConfig {
   /**
    * 设置代理 如 'PROXY 192.168.31.136:8888'
    */
-  INetWorkConfig setProxy(String proxy);
+  INetWorkConfig setProxy(String? proxy);
 
   /**
    * 设置Domain地址
@@ -20,7 +20,7 @@ abstract class INetWorkConfig {
    */
   INetWorkConfig addNetWorkInterceptor(List<NetWorkInterceptor> iNetWorkInterceptor);
 
-  String getProxy();
+  String? getProxy();
 
   String getDomain();
 
