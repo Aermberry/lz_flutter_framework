@@ -1,44 +1,33 @@
 import 'dart:convert';
-
-import 'package:inject/inject.dart';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:lz_flutter/flutter_base.dart';
-import 'package:lz_flutter_app/network/biz/http_request_auto_retry_biz.dart';
+import 'package:lz_flutter_app/network/application/http_request_auto_retry_app.dart';
 import 'package:lz_flutter_app/network/domains/simple_http_request.dart';
 
 
+@injectable
+class HttpRequestAutoRetryInterceptor extends NetWorkInterceptor{
 
-@provide
-class HttpRequestAutoRetryInterceptor extends INetWorkInterceptor{
+  HttpRequestAutoRetryApplication _retryNetworkApp;
 
-  HttpRequestAutoRetryBiz _retryNetworkBiz;
+  HttpRequestAutoRetryInterceptor(this._retryNetworkApp);
 
-  HttpRequestAutoRetryInterceptor(this._retryNetworkBiz);
-
-  @override
-  Request requestBefore(Request request) {
-    return request;
-  }
-
-  @override
-  Response requestAfter(Response response) {
-    return response;
-  }
-
-
-  @override
-  void requestError(Request request, Response<dynamic> response) {
+ @override
+  void onError(DioError err, ErrorInterceptorHandler handler) {
+    super.onError(err, handler);
+    final request = err.requestOptions;
     SimpleHttpRequest record;
-    if(request!=null){   ///没网路的情况下 request不为null
-      record =  SimpleHttpRequest(method: request.method,url: request.url,body:  request.body is String ?  request.body : jsonEncode(request.body));
+    if(err.response == null){   ///没网路的情况下 request不为null
+      record =  SimpleHttpRequest(method: request.method,url: request.uri.path,body:  request.data is String ?  request.data : jsonEncode(request.data));
     }else{  ///服务器返回错误
-      if(response.statusCode < 500)
+      if(err.response!.statusCode != null && err.response!.statusCode! < 500) {
         return;
-
-      record =  SimpleHttpRequest(method: request.method,url: request.url,body:  jsonEncode((response.base.request as Request).body));
+      }
+      record =  SimpleHttpRequest(method: request.method,url: request.uri.path,body:   jsonEncode(request.data));
     }
-    _retryNetworkBiz.saveNetworkRecord(record);
+    _retryNetworkApp.saveNetworkRecord(record);
   }
-
 
 
 }

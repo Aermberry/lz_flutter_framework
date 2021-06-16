@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:inject/inject.dart';
+import 'package:injectable/injectable.dart';
 import 'package:lz_flutter/flutter_base.dart';
+import 'package:lz_flutter_app/main_common.dart';
 
-@provide
+@injectable
 class HomePage extends StatefulWidget {
   const HomePage();
 
@@ -13,25 +12,27 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends BaseState<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    if(_scaffoldKey.currentContext != null){
-      Config.getInstance()
-          .debuggerConfig
-          .showDebuggerFloatingButton(_scaffoldKey.currentContext); //防止热更新后context销毁 因此需要用GlobalKey
+    if (_scaffoldKey.currentContext != null) {
+      Config.getInstance().debuggerConfig.showDebuggerFloatingButton(
+          _scaffoldKey.currentContext!); //防止热更新后context销毁 因此需要用GlobalKey
     }
     return Scaffold(
         key: _scaffoldKey,
+        floatingActionButton: FloatingActionButton(onPressed: (){
+          routeTo(MaterialPageRoute(builder: (ct) => getIt<HomePage>()));
+        }),
         body: Container(
           alignment: Alignment.center,
           child: InkWell(
               onTap: () {
-                throw (Exception('Test msg'));
+                throw Exception('Test msg');
               },
-              child: Text('Hello World!!!')),
+              child: const Text('Hello World!!!')),
         ));
   }
 }

@@ -5,10 +5,10 @@ import 'package:lz_flutter/flutter_base.dart';
 class SimpleHttpRequest{
 
   @PrimaryKey(autoGenerate: true)
-  int id;
-  String method = '';
-  String url = '';
-  String body = '';
+  int? id;
+  String? method = '';
+  String? url = '';
+  String? body = '';
 
   SimpleHttpRequest({this.id,this.method,this.url,this.body});
 

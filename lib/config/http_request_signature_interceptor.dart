@@ -1,34 +1,27 @@
-import 'dart:convert';
-
-
-import 'package:inject/inject.dart';
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:lz_flutter/flutter_base.dart';
+import 'package:lz_flutter_app/security/application/secutity_application.dart';
 
 
+@injectable
+class HttpRequestSignatureInterceptor extends NetWorkInterceptor{
 
-@provide
-class HttpRequestSignatureInterceptor extends INetWorkInterceptor{
+  SecurityApplication _securityApplication;
+
+  HttpRequestSignatureInterceptor(this._securityApplication);
 
   @override
-  Request requestBefore(Request request) {
-    request.headers['X-OPENINVITE-SIGNATURE'] = "";
-    request.headers['X-OPENINVITE-TIMESTAMP'] = "";
-    request.headers['X-OPENINVITE-NONCE'] = "";
-    request.headers['X-OPENINVITE-DEVICE-ID'] = "";
-    return request;
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    super.onRequest(options, handler);
+    options.headers['X-OPENINVITE-SIGNATURE'] = '';
+    options.headers['X-OPENINVITE-TIMESTAMP'] = '';
+    options.headers['X-OPENINVITE-NONCE'] = '';
+    options.headers['X-OPENINVITE-DEVICE-ID'] = '';
   }
 
   @override
-  Response requestAfter(Response response) {
-    return response;
-  }
-
-
-  @override
-  void requestError(Request request, Response<dynamic> response) {
-
-  }
-
+  Future onTokenError() async => _securityApplication.refreshToken();
 
 
 }
