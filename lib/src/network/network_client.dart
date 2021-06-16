@@ -23,6 +23,6 @@ class Api {
     return _dio!;
   }
 
-  static T getService<T>() => Config.getInstance().netWorkConfig.getRepositories().firstWhere((e) => e.runtimeType == T);
+  static T getService<T>() => Config.getInstance().netWorkConfig.getRepositories().firstWhere((e) =>  e.runtimeType.toString().replaceAll('_', '') == T.toString());
 
 }
