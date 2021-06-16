@@ -12,11 +12,11 @@ class LocalManager {
     return _instance!;
   }
 
-  String local(BuildContext context,String key) {
+  String? local(BuildContext context,String key) {
     return getLocalRes(context,key);
   }
 
-  List<String> stringList( BuildContext context,String key) {
+  List<String>? stringList( BuildContext context,String key) {
     return getLocalRes(context,key);
   }
 
