@@ -46,7 +46,7 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  Future<T?> routeTo<T extends Object>(Route<T> newRoute,{bool replace = false,bool clearStack = false,RoutePredicate? predicate}) async {
+  Future<T?> routeTo<T extends Object?>(Route<T> newRoute,{bool replace = false,bool clearStack = false,RoutePredicate? predicate}) async {
     if(replace){
       return Navigator.pushReplacement(getContext(), newRoute);
     } else if(clearStack){
