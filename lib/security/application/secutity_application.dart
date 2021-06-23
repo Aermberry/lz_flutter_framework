@@ -3,7 +3,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:lz_flutter/flutter_base.dart';
 import 'package:lz_flutter_app/security/domain/entity/login_command.dart';
 import 'package:lz_flutter_app/security/domain/entity/register_command.dart';
-import 'package:lz_flutter_app/security/domain/entity/session.dart';
+import 'package:lz_flutter_app/security/types/domain_primitive/session.dart';
 import 'package:lz_flutter_app/security/external/local_auth_service.dart';
 import 'package:lz_flutter_app/security/external/social_login_service.dart';
 import 'package:lz_flutter_app/security/repositories/security_repository.dart';

@@ -1,4 +1,4 @@
-import 'package:lz_flutter_app/security/exception/username_exception.dart';
+import 'package:lz_flutter_app/security/types/exception/username_exception.dart';
 
 class Username {
 

@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:lz_flutter/flutter_base.dart';
 import 'package:lz_flutter_app/security/domain/entity/login_command.dart';
 import 'package:lz_flutter_app/security/domain/entity/register_command.dart';
-import 'package:lz_flutter_app/security/domain/entity/session.dart';
+import 'package:lz_flutter_app/security/types/domain_primitive/session.dart';
 import 'package:lz_flutter_app/security/remote_persistencce/dto/login_response.dart';
 import 'package:lz_flutter_app/security/remote_persistencce/security_retrofit.dart';
 

@@ -29,6 +29,7 @@ dependencies:
   lz_flutter:
     git:
       url: http://gitlab.liangzhicn.com/lz-flutter/lz-flutter.git
+      ref: '1.3.0'
   #toast提示
   fluttertoast: ^8.0.7
   #网络请求

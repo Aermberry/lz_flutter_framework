@@ -1,6 +1,6 @@
 
 import 'package:lz_flutter/flutter_base.dart';
-import 'package:lz_flutter_app/security/domain/entity/session.dart';
+import 'package:lz_flutter_app/security/types/domain_primitive/session.dart';
 
 part 'login_response.g.dart';
 

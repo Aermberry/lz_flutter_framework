@@ -1,4 +1,4 @@
-import 'package:lz_flutter_app/security/exception/password_exception.dart';
+import 'package:lz_flutter_app/security/types/exception/password_exception.dart';
 
 class Password {
   String password;
