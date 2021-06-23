@@ -7,11 +7,11 @@ abstract class View {
 
   BuildContext getContext();
 
-  void showMsgBySnackBar(String msg);
+  void showMsgBySnackBar(String msg,{bool needLocal = false });
 
-  void showMsgByToast(String msg);
+  void showMsgByToast(String msg,{bool needLocal = false});
 
-  void showLoadingDialog({String msg,bool barrierDismissible = false});
+  void showLoadingDialog({String msg,bool needLocal = false ,bool barrierDismissible = false});
 
   void hideLoadingDialog();
 

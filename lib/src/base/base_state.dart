@@ -8,17 +8,26 @@ import '../widget/default_loading_dialog.dart';
 abstract class BaseState<T extends StatefulWidget>  extends State<T> implements View{
 
   @override
-  void showMsgBySnackBar(String msg) {
+  void showMsgBySnackBar(String msg,{bool needLocal = false}) {
+    if(needLocal){
+      msg = msg.resLocal(getContext());
+    }
     Scaffold.of(getContext()).showSnackBar(SnackBar(content: new Text(msg)));
   }
 
   @override
-  void showMsgByToast(String msg) {
+  void showMsgByToast(String msg,{bool needLocal = false}) {
+    if(needLocal){
+      msg = msg.resLocal(getContext());
+    }
     Fluttertoast.showToast(msg: msg);
   }
 
   @override
-  void showLoadingDialog({String? msg,bool barrierDismissible = false}) {
+  void showLoadingDialog({String? msg, bool needLocal = false, bool barrierDismissible = false}) {
+    if(msg!=null && needLocal){
+      msg = msg.resLocal(getContext());
+    }
     showDialog(
         barrierDismissible: barrierDismissible,
         context: getContext(),
