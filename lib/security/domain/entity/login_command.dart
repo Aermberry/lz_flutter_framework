@@ -3,18 +3,18 @@ import 'package:lz_flutter_app/security/remote_persistencce/dto/login_request.da
 
 import 'password.dart';
 
-class LoginData{
+class LoginCommand{
 
   Password _password;
   Username _username;
 
-  LoginData(this._username,this._password);
+  LoginCommand(this._username,this._password);
 
   void checkValid(){
-    _username.check();
+    _username.valid();
     _password.check();
   }
 
-  LoginRequest toLoginRequest() => LoginRequest(_username.username,_password.password);
+  LoginRequest toDto() => LoginRequest(_username.username,_password.password);
 
 }

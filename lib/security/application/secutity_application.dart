@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:lz_flutter/flutter_base.dart';
-import 'package:lz_flutter_app/security/domain/entity/login_data.dart';
-import 'package:lz_flutter_app/security/domain/entity/register_data.dart';
+import 'package:lz_flutter_app/security/domain/entity/login_command.dart';
+import 'package:lz_flutter_app/security/domain/entity/register_command.dart';
 import 'package:lz_flutter_app/security/domain/entity/session.dart';
 import 'package:lz_flutter_app/security/external/local_auth_service.dart';
 import 'package:lz_flutter_app/security/external/social_login_service.dart';
@@ -18,16 +18,16 @@ class SecurityApplication {
   SecurityApplication(this._securityRepository,this._localAuthService,this._socialLoginService);
 
   //账号密码登录
-  Future<void> login(LoginData loginData) async {
-    loginData.checkValid();
-    final loginResponse = await _securityRepository.login(loginData);
+  Future<void> login(LoginCommand loginCommand) async {
+    loginCommand.checkValid();
+    final loginResponse = await _securityRepository.login(loginCommand);
     loginResponse.toSession().save();
   }
 
   //注册
-  Future<void> register(RegisterData registerData) async {
-    registerData.checkValid();
-    final loginResponse = await _securityRepository.register(registerData);
+  Future<void> register(RegisterCommand registerCommand) async {
+    registerCommand.checkValid();
+    final loginResponse = await _securityRepository.register(registerCommand);
     loginResponse.toSession().save();
   }
 

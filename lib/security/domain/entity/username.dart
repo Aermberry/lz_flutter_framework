@@ -6,7 +6,7 @@ class Username {
 
   Username(this.username);
 
-  void check(){
+  void valid(){
     if(username == null){
       throw UsernameException(UsernameExceptionCode.usernameNull,'username is null');
     }else if(username.length < 8){

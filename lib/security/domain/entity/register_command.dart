@@ -4,18 +4,18 @@ import 'package:lz_flutter_app/security/remote_persistencce/dto/register_request
 
 import 'password.dart';
 
-class RegisterData{
+class RegisterCommand{
 
   Password _password;
   Username _username;
 
-  RegisterData(this._username,this._password);
+  RegisterCommand(this._username,this._password);
 
   void checkValid(){
-    _username.check();
+    _username.valid();
     _password.check();
   }
 
-  RegisterRequest toRegisterRequest() => RegisterRequest(_username.username,_password.password);
+  RegisterRequest toDto() => RegisterRequest(_username.username,_password.password);
 
 }
