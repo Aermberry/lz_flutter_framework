@@ -461,3 +461,162 @@ SharedPreferences的封装类用于简单常用数据存取
 
 防重放攻击密钥计算
 
+
+
+#### 业务相关
+
+框架实现了一些常用的业务，但需要根据自己项目的实际需求更改
+
+##### 推送
+
+需要先按照[flutter_apns](https://pub.flutter-io.cn/packages/flutter_apns)文档配置iOS/Android 
+
+```dart
+@singleton
+@injectable
+class NotificationApplication {
+
+  //在maim_common 初始化
+  Future<void> init() async {
+    final connector = createPushConnector();
+    connector.configure(
+      onLaunch: onPush,
+      onResume: onPush,
+      onMessage: onPush,
+      onBackgroundMessage: onBackgroundMessage
+    );
+
+    connector.token.addListener(
+            ()  => onTokenRefresh(connector.token.value!));
+    connector.requestNotificationPermissions();
+  }
+
+  //Token刷新回调
+  Future onTokenRefresh(String token) async {
+    print(token);
+  }
+
+  //消息推送回调
+  Future onPush(RemoteMessage message) async {
+    print(message);
+  }
+
+  //透传消息回调
+  Future onBackgroundMessage(RemoteMessage message) async {
+    print(message);
+  }
+
+}
+
+```
+
+##### 第三方登录
+
+```dart
+@injectable
+class SocialLoginService {
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>['email', 'https://www.googleapis.com/auth/contacts.readonly']);
+
+  //Google登录 返回google账号的唯一id
+  Future<String> signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    if(googleUser == null){
+      throw SocialLoginException(SocialLoginExceptionCode.loginWithGoogleError,'sign with google wrong');
+    }
+    return googleUser.id;
+  }
+
+  //Apple登录 返回Apple账号的唯一id
+  Future<String> signInWithApple() async {
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+      return credential.userIdentifier!;
+  }
+
+}
+```
+
+##### 指纹/人脸验证
+
+```dart
+// 需要参考 https://pub.dev/packages/local_auth 配置Android iOS
+
+@injectable
+class LocalAuthService {
+  LocalAuthentication localAuth = LocalAuthentication();
+
+  //指纹/人脸登录，返回值代表是否验证成功, BiometricType:验证类型 localizedReason:验证原因
+  Future<bool> loginWithLocalAuth(BiometricType biometricType, String localizedReason) async {
+    final List<BiometricType> availableBiometrics = await localAuth.getAvailableBiometrics();
+    if (!await localAuth.canCheckBiometrics) {
+      throw LocalAuthException(LocalAuthExceptionCode.cantSupportBiometrics, 'the device can not support biometrics');
+    }
+    if (!availableBiometrics.contains(biometricType)) {
+      throw LocalAuthException(LocalAuthExceptionCode.noAvailableBiometrics, 'the biometricType no available');
+    }
+    return localAuth.authenticate(localizedReason: localizedReason, biometricOnly: true);
+  }
+
+}
+```
+
+##### 账号密码登录
+
+只实现基本流程，根据自己项目需求更改Domain和相关逻辑
+
+```dart
+@injectable
+class SecurityApplication {
+
+  //账号密码登录
+  Future<void> login(LoginCommand loginCommand) async {
+    loginCommand.checkValid();
+    final loginResponse = await _securityRepository.login(loginCommand);
+    loginResponse.toSession().save();
+  }
+
+  //注册
+  Future<void> register(RegisterCommand registerCommand) async {
+    registerCommand.checkValid();
+    final loginResponse = await _securityRepository.register(registerCommand);
+    loginResponse.toSession().save();
+  }
+  
+  //Google登录
+  Future loginWithGoogle() async {
+    final googleId = await _socialLoginService.signInWithGoogle();
+    final loginResponse = await _securityRepository.googleSignIn(googleId);
+    loginResponse.toSession().save();
+  }
+
+  //关联Google
+  Future bindGoogleAccount() async {
+    final googleId = await _socialLoginService.signInWithGoogle();
+    await _securityRepository.bindGoogleAccount(googleId);
+  }
+
+  //登出
+  Future<void> logout() async {
+    await SpUtil.putObject('user','');
+  }
+
+  //刷新token
+  Future refreshToken() async {
+    final Session session = Session.fromJson(SpUtil.getObject('user') as Map<String, dynamic> );
+    await _securityRepository.refreshAccessToken(session);
+  }
+
+  Session? getSession(){
+    if(SpUtil.getObject('user') == null){
+      return null;
+    }
+    final Session session = Session.fromJson(SpUtil.getObject('user') as Map<String, dynamic> );
+    return session;
+  }
+```
+
