@@ -4,5 +4,5 @@
 	branch = stable
 [submodule "jenkins"]
 	path = jenkins
-	url = https://gitlab.liangzhicn.com/jenkins-ci/flutter-app.git
+	url = git@gitlab.liangzhicn.com:jenkins-ci/flutter-app.git
 	branch = master
