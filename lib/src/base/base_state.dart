@@ -55,13 +55,14 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  Future<T?> routeTo<T extends Object?>(Route<T> newRoute,{bool replace = false,bool clearStack = false,RoutePredicate? predicate}) async {
+  Future<T?> routeTo<T extends Object?>(Route<T> newRoute,{bool replace = false,bool clearStack = false,RoutePredicate? predicate,bool rootNavigator = false}) async {
+    NavigatorState  navigatorState = Navigator.of(getContext(),rootNavigator: rootNavigator);
     if(replace){
-      return Navigator.pushReplacement(getContext(), newRoute);
+      return navigatorState.pushReplacement(newRoute);
     } else if(clearStack){
-      return Navigator.pushAndRemoveUntil(getContext(), newRoute, predicate ?? (route) => false);
+      return navigatorState.pushAndRemoveUntil(newRoute, predicate ?? (route) => false);
     }else{
-      return Navigator.push<T>(getContext(), newRoute);
+      return navigatorState.push<T>(newRoute);
     }
   }
 
