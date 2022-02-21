@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lz_flutter/flutter_base.dart';
 import '../widget/default_loading_dialog.dart';
 
+// final getIt = GetIt.instance;
 
 abstract class BaseState<T extends StatefulWidget>  extends State<T> implements View{
 
@@ -40,13 +41,13 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
   @override
-  void hideLoadingDialog(){
-    pop();
+  void hideLoadingDialog({bool rootNavigator = false}){
+    pop(rootNavigator: rootNavigator);
   }
 
   @override
-  void pop({Object? result}) {
-    Navigator.of(getContext()).pop(result);
+  void pop({Object? result,bool rootNavigator = false}) {
+    Navigator.of(getContext(),rootNavigator: rootNavigator).pop(result);
   }
 
   @override
@@ -77,3 +78,23 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
   }
 
 }
+
+// abstract class BaseMVPState<T extends StatefulWidget,P extends BaseMvpPresenter>  extends BaseState<T> {
+//
+//   late P presenter;
+//
+//   @override
+//   void initState() {
+//     presenter = getIt<P>();
+//     presenter.bind(this);
+//     presenter.initState();
+//     super.initState();
+//   }
+//
+//   @override
+//   void dispose() {
+//     presenter.dispose();
+//     super.dispose();
+//   }
+//
+// }
