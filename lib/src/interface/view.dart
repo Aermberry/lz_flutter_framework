@@ -13,9 +13,9 @@ abstract class View {
 
   void showLoadingDialog({String msg,bool needLocal = false ,bool barrierDismissible = false});
 
-  void hideLoadingDialog();
+  void hideLoadingDialog({bool rootNavigator = false});
 
-  void pop({result});
+  void pop({Object? result,bool rootNavigator = false});
 
   void popTo(String routePath);
 
