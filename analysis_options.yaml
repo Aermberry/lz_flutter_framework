@@ -5,6 +5,7 @@ analyzer:
     - lib/di/**
     - lib/device/domains/device_file.g.dart
     - inject.dart
+    - jenkins/**
 
   errors:
     invalid_assignment: warning

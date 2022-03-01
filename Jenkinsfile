@@ -42,7 +42,7 @@ pipeline {
           }
           steps {
             sh "jenkins/scripts/package_android.sh"
-            archiveArtifacts(sh(script: 'jenkins/scripts/get_android_package_path.sh', returnStdout: true).trim())
+            archiveArtifacts('**/' + sh(script: 'jenkins/scripts/get_package_file_name.sh', returnStdout: true).trim() + '.*')
           }
           post {
             failure {
@@ -139,11 +139,13 @@ pipeline {
   post {
     always {
       script {
+        webhook = load 'jenkins/groovy/webhook.groovy'
         email = load 'jenkins/groovy/email.groovy'
       }
     }
     success {
       script {
+        webhook.triggerSuccessWebhook()
         email.sendPipelineSuccessEmail()
       }
     }
