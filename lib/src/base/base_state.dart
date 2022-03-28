@@ -3,10 +3,45 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lz_flutter/flutter_base.dart';
 import '../widget/default_loading_dialog.dart';
+import 'package:get_it/get_it.dart';
+import 'package:lifecycle/lifecycle.dart';
 
-// final getIt = GetIt.instance;
+final getIt = GetIt.instance;
 
-abstract class BaseState<T extends StatefulWidget>  extends State<T> implements View{
+class Lifecycle{
+
+  void push(){}
+
+  void visible(){}
+
+  void active(){}
+
+  void inactive(){}
+
+  void invisible(){}
+
+  void willPop(){}
+
+}
+
+abstract class BaseState<T extends StatefulWidget>  extends State<T>  with LifecycleAware, LifecycleMixin,Lifecycle implements View {
+
+  @override
+  void onLifecycleEvent(LifecycleEvent event) {
+    if(event == LifecycleEvent.push){
+      push();
+    }else if(event == LifecycleEvent.visible){
+      visible();
+    }else if(event == LifecycleEvent.active){
+      active();
+    }else if(event == LifecycleEvent.inactive){
+      inactive();
+    }else if(event == LifecycleEvent.invisible){
+      invisible();
+    }else if(event == LifecycleEvent.pop){
+      willPop();
+    }
+  }
 
   @override
   void showMsgBySnackBar(String msg,{bool needLocal = false}) {
@@ -79,22 +114,45 @@ abstract class BaseState<T extends StatefulWidget>  extends State<T> implements 
 
 }
 
-// abstract class BaseMVPState<T extends StatefulWidget,P extends BaseMvpPresenter>  extends BaseState<T> {
-//
-//   late P presenter;
-//
-//   @override
-//   void initState() {
-//     presenter = getIt<P>();
-//     presenter.bind(this);
-//     presenter.initState();
-//     super.initState();
-//   }
-//
-//   @override
-//   void dispose() {
-//     presenter.dispose();
-//     super.dispose();
-//   }
-//
-// }
+abstract class BaseMVPState<T extends StatefulWidget,P extends BaseMvpPresenter>  extends BaseState<T> {
+
+  late P presenter;
+
+  @override
+  void initState() {
+    presenter = getIt<P>();
+    presenter.bind(this);
+    bindData();
+    super.initState();
+    presenter.initState();
+  }
+
+  @override
+  void onLifecycleEvent(LifecycleEvent event) {
+    super.onLifecycleEvent(event);
+    if(event == LifecycleEvent.push){
+      presenter.push();
+    }else if(event == LifecycleEvent.visible){
+      presenter.visible();
+    }else if(event == LifecycleEvent.active){
+      presenter.active();
+    }else if(event == LifecycleEvent.inactive){
+      presenter.inactive();
+    }else if(event == LifecycleEvent.invisible){
+      presenter.invisible();
+    }else if(event == LifecycleEvent.pop){
+      presenter.willPop();
+    }
+  }
+
+  void bindData(){
+
+  }
+
+  @override
+  void dispose() {
+    presenter.dispose();
+    super.dispose();
+  }
+
+}
