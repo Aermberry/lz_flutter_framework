@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lz_flutter/flutter_base.dart';
 import 'package:lz_flutter_app/main_common.dart';
+import 'package:lz_flutter_app/security/page/login_page.dart';
 
-@injectable
 class HomePage extends StatefulWidget {
   const HomePage();
 
@@ -21,10 +21,12 @@ class _HomePageState extends BaseState<HomePage> {
       Config.getInstance().debuggerConfig.showDebuggerFloatingButton(
           _scaffoldKey.currentContext!); //防止热更新后context销毁 因此需要用GlobalKey
     }
+    Log.e('ee');
     return Scaffold(
         key: _scaffoldKey,
         floatingActionButton: FloatingActionButton(onPressed: (){
-          routeTo(MaterialPageRoute(builder: (ct) => getIt<HomePage>()));
+          Log.e('msgg');
+          routeTo(MaterialPageRoute(builder: (ct) => LoginPage()));
         }),
         body: Container(
           alignment: Alignment.center,

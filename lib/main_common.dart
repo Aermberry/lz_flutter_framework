@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:lz_flutter/flutter_base.dart';
-import 'package:lz_flutter_app/proxy.dart';
 import 'package:lz_flutter_app/res/string/en.dart';
 import 'package:lz_flutter_app/res/string/zh.dart';
 import 'package:lz_flutter_app/security/remote_persistencce/security_retrofit.dart';
-
+import 'package:lifecycle/lifecycle.dart';
 import 'config/http_request_auto_retry_interceptor.dart';
 import 'config/http_request_signature_interceptor.dart';
 import 'home/page/home.dart';
@@ -14,8 +13,6 @@ import 'main_common.config.dart';
 
 late String apiDomain;
 late bool isDebug;
-
-final getIt = GetIt.instance;
 
 @InjectableInit(
   initializerName: r'$initGetIt', // default
@@ -38,9 +35,9 @@ Future<void> init() async {
   configureDependencies(); //初始化IOC
   await SpUtil.getInstance(); //初始化SharedPreferences
   if (isDebug) {
-    Config.getInstance().netWorkConfig.setProxy(proxy); //如果是main_debug入口才会启用代理
+    Config.getInstance().netWorkConfig.setProxy('PROXY 192.168.28.46:8888'); //如果是main_debug入口才会启用代理
   }
-  Config.getInstance().debuggerConfig.startCatchAllException(); //开启全局异常捕获
+  Config.getInstance().debuggerConfig.start('71523611','3FBE8AA2485EC4DFFA5B6CBD03712BE4',sendToServer: true); //启动日志监控
   Config.getInstance().resourceConfig //资源配置
       .setLocalRes({'zh': zh, 'en': en}) //传入 国际化文件
       .setDefaultLanguageCode('zh'); //国际化文件没有当前手机语言时 显示的默认语言
@@ -56,11 +53,11 @@ Future<void> init() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        navigatorKey: Config.getInstance()
-            .debuggerConfig
-            .navigatorKey, //添加debugger悬浮框需要配置navigatorKey
+      navigatorObservers: [defaultLifecycleObserver],
+        navigatorKey: Config.getInstance().debuggerConfig.navigatorKey,
+        //添加debugger悬浮框需要配置navigatorKey
         title: 'Flutter Demo',
-        home: getIt<HomePage>(),
+        home: const HomePage(),
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
