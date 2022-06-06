@@ -33,6 +33,7 @@ class Log {
         da = da.substring(_maxLen, da.length);
       } else {
         print('$stag| ${frame.uri}:${frame.line}:${frame.column} | $da');
+        da = '';
       }
     }
   }
