@@ -10,6 +10,8 @@
 .svn/
 *.inject.dart
 *.inject.summary
+*.g.dart
+*.config.dart
 
 # IntelliJ related
 *.iml

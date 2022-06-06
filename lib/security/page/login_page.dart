@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:lz_flutter/flutter_base.dart';
 import 'login_presenter.dart';
 import 'login_view.dart';
 
+@injectable
 class LoginPage extends StatefulWidget {
 
   @override

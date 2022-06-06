@@ -26,7 +26,7 @@ class _HomePageState extends BaseState<HomePage> {
         key: _scaffoldKey,
         floatingActionButton: FloatingActionButton(onPressed: (){
           Log.e('msgg');
-          routeTo(MaterialPageRoute(builder: (ct) => LoginPage()));
+          routeTo(MaterialPageRoute(builder: (ct) => getIt<LoginPage>()));
         }),
         body: Container(
           alignment: Alignment.center,

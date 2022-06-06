@@ -21,7 +21,6 @@ class HttpRequestSignatureInterceptor extends NetWorkInterceptor{
   }
 
   @override
-  Future onTokenError() async => _securityApplication.refreshToken();
-
+  Future onTokenError(DioError err) => _securityApplication.refreshToken();
 
 }
