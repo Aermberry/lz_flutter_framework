@@ -1,8 +1,10 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:lz_flutter/flutter_base.dart';
 import 'package:lz_flutter/src/debugger/debugger_main_page/debugger_main_page.dart';
 import 'package:lz_flutter/src/debugger/domain/lz_flutter_error_detail.dart';
 import 'package:lz_flutter/src/interface/i_debugger_config.dart';
+import 'package:lz_flutter/src/network/debugger_interceptor.dart';
 
 List<LZFlutterErrorDetail> flutterErrorDetails = [];
 
@@ -18,6 +20,7 @@ class DebuggerConfig extends IDebuggerConfig {
   void showDebuggerFloatingButton(BuildContext context) {
     if (!isShow) {
       isShow = true;
+      Config.getInstance().netWorkConfig.addNetWorkInterceptor([DebuggerInterceptor()]);
       WidgetsBinding.instance?.addPostFrameCallback((_) {
         addOverlayEntry(context, MediaQuery
             .of(context)
