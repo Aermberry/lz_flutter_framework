@@ -122,7 +122,7 @@ abstract class BaseMVPState<T extends StatefulWidget,P extends BaseMvpPresenter>
   void initState() {
     presenter = getIt<P>();
     presenter.bind(this);
-    bindData();
+    initData();
     super.initState();
     presenter.initState();
   }
@@ -145,7 +145,7 @@ abstract class BaseMVPState<T extends StatefulWidget,P extends BaseMvpPresenter>
     }
   }
 
-  void bindData(){
+  void initData(){
 
   }
 

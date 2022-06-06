@@ -1,4 +1,3 @@
-import 'package:lz_flutter/src/interface/view.dart';
 
 import '../../flutter_base.dart';
 
